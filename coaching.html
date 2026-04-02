@@ -219,7 +219,11 @@
   .sidebar-panel {
     background: white; border: 1px solid var(--border);
     border-radius: var(--radius); overflow: hidden;
-    box-shadow: var(--shadow-sm); position: sticky; top: 76px;
+    box-shadow: var(--shadow-sm);
+  }
+  .sidebar-sticky {
+    position: sticky; top: 76px;
+    display: flex; flex-direction: column; gap: 16px;
   }
 
   /* Submit form */
@@ -341,7 +345,7 @@
     .coaching-hero { grid-template-columns: 1fr; }
     .hero-countdown { display: none; }
     .coaching-body { grid-template-columns: 1fr; }
-    .sidebar-panel { position: static; }
+    .sidebar-sticky { position: static; }
     .topbar-nav { display: none; }
   }
 </style>
@@ -460,22 +464,22 @@
 
 
     <!-- ═══ Sidebar ═══ -->
-    <div>
+    <div class="sidebar-sticky">
+
+      <!-- Card 1: Submit header -->
+      <div class="sidebar-panel" style="padding: 20px 24px;">
+        <div class="card-label" style="margin-bottom: 6px;">Submit Your Problem</div>
+        <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.55; margin: 0;">Every submission gets reviewed. The most applicable problems get worked live on Thursday.</p>
+      </div>
+
+      <!-- Card 2: Typeform embed -->
+      <div class="sidebar-panel" style="padding: 20px 24px;">
+        <div data-tf-live="01KN6N41MG69GD68FBMCC87BJ9"></div><script src="//embed.typeform.com/next/embed.js"></script>
+      </div>
+
+      <!-- Card 3: Session details -->
       <div class="sidebar-panel">
-
-        <!-- Submit header -->
-        <div style="padding: 20px 24px 16px; border-bottom: 1px solid var(--border);">
-          <div class="card-label" style="margin-bottom: 6px;">Submit Your Problem</div>
-          <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.55; margin: 0;">Every submission gets reviewed. The most applicable problems get worked live on Thursday.</p>
-        </div>
-
-        <!-- Typeform embed -->
-        <div style="padding: 20px 24px;">
-          <div data-tf-live="01KN6N41MG69GD68FBMCC87BJ9"></div><script src="//embed.typeform.com/next/embed.js"></script>
-        </div>
-
-        <!-- Schedule info -->
-        <div class="schedule-info">
+        <div class="schedule-info" style="border-radius: var(--radius);">
           <div class="schedule-info-title">Session Details</div>
           <div class="schedule-row">
             <span class="schedule-row-icon">📅</span>
@@ -494,8 +498,8 @@
             <div class="schedule-row-text"><strong>Submit by Tue 4pm</strong><br>GMT+7 to be considered</div>
           </div>
         </div>
-
       </div>
+
     </div>
 
   </div>
