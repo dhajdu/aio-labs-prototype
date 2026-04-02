@@ -218,7 +218,7 @@
   /* ── Sidebar ── */
   .sidebar-panel {
     background: white; border: 1px solid var(--border);
-    border-radius: var(--radius); overflow: visible;
+    border-radius: var(--radius); overflow: hidden;
     box-shadow: var(--shadow-sm); position: sticky; top: 76px;
   }
 
@@ -381,17 +381,17 @@
 </section>
 <main class="page-main site-wrap">
 
+  <!-- ── Up Next header (full-width, above grid) ── -->
+  <div class="section-head" style="margin-bottom: 16px;">
+    <span class="section-head-title">Up Next</span>
+    <span class="section-head-meta">Thu, 9 Apr &middot; 11:30 AM GMT+7</span>
+  </div>
+
   <!-- ── Body ── -->
   <div class="coaching-body">
 
     <!-- ═══ Main column ═══ -->
     <div>
-
-      <!-- Upcoming -->
-      <div class="section-head">
-        <span class="section-head-title">Up Next</span>
-        <span class="section-head-meta">Thu, 9 Apr &middot; 11:30 AM GMT+7</span>
-      </div>
 
       <div class="upcoming-banner">
         <div class="upcoming-tag">
@@ -464,10 +464,10 @@
     <div>
       <div class="sidebar-panel">
 
-        <!-- Submit form -->
-        <div class="submit-panel-header">
-          <div class="submit-panel-title">Submit Your Problem</div>
-          <div class="submit-panel-sub">Every submission gets reviewed. The most broadly applicable problems get worked live on Thursday.</div>
+        <!-- Submit header -->
+        <div style="padding: 20px 24px 16px; border-bottom: 1px solid var(--border);">
+          <div class="card-label" style="margin-bottom: 6px;">Submit Your Problem</div>
+          <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.55; margin: 0;">Every submission gets reviewed. The most applicable problems get worked live on Thursday.</p>
         </div>
 
         <!-- Typeform embed -->
