@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CAIO Coaching | AI Officer Institute</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="shared/styles.css">
+<link rel="stylesheet" href="https://www.caiocoach.com/shared/styles.css">
 <style>
   :root {
     --ease: cubic-bezier(0.4, 0, 0.2, 1);
@@ -218,7 +218,7 @@
   /* ── Sidebar ── */
   .sidebar-panel {
     background: white; border: 1px solid var(--border);
-    border-radius: var(--radius); overflow: hidden;
+    border-radius: var(--radius); overflow: visible;
     box-shadow: var(--shadow-sm); position: sticky; top: 76px;
   }
 
@@ -470,16 +470,8 @@
           <div class="submit-panel-sub">Every submission gets reviewed. The most broadly applicable problems get worked live on Thursday.</div>
         </div>
 
-        <!-- Chat interface -->
-        <div class="buddy-chat-msgs" id="coachingChat">
-          <div class="buddy-chat-msg from-buddy">
-            Hey! Tell me what you're working on or where you're stuck — I'll help you shape it into a clear submission for Thursday's session. 👋
-          </div>
-        </div>
-        <div class="buddy-chat-input">
-          <input class="buddy-chat-field" id="coachingInput" type="text" placeholder="Describe your problem…" onkeydown="if(event.key==='Enter') sendCoachingMsg()">
-          <button class="buddy-chat-send" onclick="sendCoachingMsg()">→</button>
-        </div>
+        <!-- Typeform embed -->
+        <div data-tf-live="01KN6N41MG69GD68FBMCC87BJ9"></div><script src="//embed.typeform.com/next/embed.js"></script>
 
         <!-- Schedule info -->
         <div class="schedule-info">
@@ -509,75 +501,6 @@
 
 </main>
 
-<script>
-// Calculate next Thursday countdown
-function getNextThursday() {
-  const now = new Date();
-  // Convert to GMT+7
-  const gmt7 = new Date(now.getTime() + (7 * 60 * 60 * 1000) - (now.getTimezoneOffset() * 60 * 1000));
-  const day = gmt7.getDay(); // 0=Sun, 4=Thu
-  let daysUntil = (4 - day + 7) % 7;
-  if (daysUntil === 0) {
-    // It's Thursday — check if session has started (11:30 AM)
-    const hours = gmt7.getHours();
-    const mins = gmt7.getMinutes();
-    if (hours > 13 || (hours === 13 && mins >= 30)) {
-      daysUntil = 7; // Session over, next Thursday
-    }
-  }
-  const next = new Date(gmt7);
-  next.setDate(gmt7.getDate() + daysUntil);
-  return { days: daysUntil, date: next };
-}
-
-// Countdown elements removed, kept for future use if countdown is re-added
-
-// Filter coaching sessions by track
-function filterCoaching(track) {
-  document.querySelectorAll('.filter-tab').forEach(btn => btn.classList.remove('active'));
-  document.querySelector(`.filter-tab.${track}`).classList.add('active');
-  document.querySelectorAll('#coachingGrid .session-card').forEach(card => {
-    card.style.display = (track === 'all' || card.dataset.track === track) ? '' : 'none';
-  });
-}
-
-// Coaching chat
-const coachingReplies = [
-  "Got it, can you tell me a bit more about where exactly you're getting stuck?",
-  "That's a great problem to bring to the session. What have you already tried?",
-  "Interesting, is this more of a tool question, a strategy question, or both?",
-  "Thanks for sharing that. Would you say the main challenge is the prompt, the workflow, or getting buy-in from your team?",
-  "Perfect. I'll flag this for Dave to review before Thursday. Anything else you want to add?",
-  "✓ Got it, your submission has been noted. Dave will review it before Thursday's session and reach out if it's selected."
-];
-let coachingTurn = 0;
-
-function sendCoachingMsg() {
-  const input = document.getElementById('coachingInput');
-  const chat = document.getElementById('coachingChat');
-  const text = input.value.trim();
-  if (!text) return;
-
-  // User message
-  const userMsg = document.createElement('div');
-  userMsg.className = 'buddy-chat-msg from-user';
-  userMsg.textContent = text;
-  chat.appendChild(userMsg);
-  input.value = '';
-
-  // AI reply
-  setTimeout(() => {
-    const reply = document.createElement('div');
-    reply.className = 'buddy-chat-msg from-buddy';
-    reply.textContent = coachingReplies[Math.min(coachingTurn, coachingReplies.length - 1)];
-    chat.appendChild(reply);
-    chat.scrollTop = chat.scrollHeight;
-    coachingTurn++;
-  }, 600);
-
-  chat.scrollTop = chat.scrollHeight;
-}
-</script>
 
 </body>
 </html>
