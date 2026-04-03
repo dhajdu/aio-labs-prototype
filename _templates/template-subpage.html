@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<!--
+  TEMPLATE: SUB-PAGE (Pattern C)
+  ═══════════════════════════════
+  Use for: detail/content pages reached from a hub or index
+  Examples: micro-sessions/ai-browsers.html, blog/posts/post-name.html,
+            all micro-session sub-pages (-video, -slides, -recap, etc.)
+
+  CHECKLIST BEFORE PUBLISHING:
+  [ ] Update <title>
+  [ ] Update .mission-back href and label text
+  [ ] Update .mission-track-pill with correct track colour (see comments)
+  [ ] Set correct nav link as "active"
+  [ ] Fix all href paths to match this file's folder depth
+  [ ] Replace all PLACEHOLDER text
+  [ ] Update resource sidebar links to this session's 6 sub-pages
+  [ ] Add "active" class to the resource card for the CURRENT page
+  [ ] Remove this comment block
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PLACEHOLDER TITLE — AI Officer Institute</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/styles.css"><!-- ← adjust depth -->
+<style>
+  :root {
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --radius: 12px;
+    --shadow-sm: 0 1px 3px rgba(4,16,45,0.07);
+    --shadow-hover: 0 6px 24px rgba(4,16,45,0.10);
+    --border-hover: #b0b6cc;
+  }
+  body { background: var(--surface); }
+
+  /* ── Topbar extras ── */
+  .topbar-stat {
+    display: flex; align-items: center; gap: 5px;
+    font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600;
+    color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.07);
+    padding: 5px 12px; border-radius: 6px;
+  }
+  .topbar-avatar {
+    width: 32px; height: 32px; border-radius: 50%; background: var(--blue);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; color: white;
+  }
+
+  /* ── Breadcrumb / back link ── */
+  .mission-back {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 13px; font-weight: 600; color: var(--text-muted);
+    text-decoration: none; margin-bottom: 28px; transition: color 0.12s;
+  }
+  .mission-back:hover { color: var(--text-primary); }
+
+  /* ── Page header ── */
+  .mission-header { margin-bottom: 32px; }
+  .mission-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .mission-track-pill {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 5px 12px; border-radius: 20px;
+  }
+  .mission-track-pill .dot { width: 5px; height: 5px; border-radius: 50%; }
+  .mission-title { font-size: 34px; font-weight: 700; color: var(--text-primary); letter-spacing: -0.5px; line-height: 1.15; margin-bottom: 10px; }
+  .mission-sub { font-size: 15px; color: var(--text-secondary); line-height: 1.6; max-width: 620px; }
+
+  /* ── Two-column body ── */
+  .mission-body { display: grid; grid-template-columns: 1fr 300px; gap: 24px; align-items: start; }
+
+  /* ── Content cards ── */
+  .content-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 24px 28px;
+    box-shadow: var(--shadow-sm); margin-bottom: 16px;
+  }
+  .card-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #287BE8; margin-bottom: 14px; }
+  .card-heading { font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 14px; letter-spacing: -0.2px; }
+  .card-text { font-size: 14px; color: var(--text-secondary); line-height: 1.65; margin-bottom: 12px; }
+  .card-text:last-child { margin-bottom: 0; }
+
+  /* ── Step list (inside challenge card) ── */
+  .step-list { display: flex; flex-direction: column; gap: 16px; margin-top: 4px; }
+  .step-item { display: flex; gap: 14px; }
+  .step-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; color: #287BE8; background: rgba(40,123,232,0.08); padding: 4px 10px; border-radius: 6px; flex-shrink: 0; margin-top: 2px; white-space: nowrap; }
+  .step-title { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+  .step-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+
+  /* ── Submit box (dark, inside challenge card) ── */
+  .submit-box { background: #04102D; border-radius: 10px; padding: 20px 24px; margin-top: 16px; }
+  .submit-box-title { font-size: 12px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 12px; }
+  .submit-list { display: flex; flex-direction: column; gap: 8px; }
+  .submit-item { display: flex; align-items: baseline; gap: 10px; font-size: 13px; color: rgba(255,255,255,0.8); }
+  .submit-dot { width: 5px; height: 5px; border-radius: 50%; background: #6FF2C1; flex-shrink: 0; margin-top: 6px; }
+
+  /* ── Resource sidebar ── */
+  .resource-stack { display: flex; flex-direction: column; gap: 8px; }
+  .resource-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 14px 16px;
+    text-decoration: none; color: inherit;
+    display: flex; align-items: center; gap: 12px;
+    box-shadow: var(--shadow-sm); transition: all 0.15s var(--ease);
+  }
+  .resource-card:hover { border-color: rgba(40,123,232,0.35); box-shadow: 0 4px 16px rgba(4,16,45,0.09); transform: translateY(-1px); }
+  .resource-card.active { border-color: rgba(40,123,232,0.4); background: rgba(40,123,232,0.04); }
+  .resource-icon { width: 36px; height: 36px; border-radius: 9px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+  .resource-info { flex: 1; min-width: 0; }
+  .resource-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.7px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1px; }
+  .resource-title { font-size: 13px; font-weight: 700; color: var(--text-primary); }
+  .resource-arrow { font-size: 13px; color: var(--text-muted); flex-shrink: 0; }
+  .resource-card.active .resource-arrow { color: #287BE8; }
+
+  /* ── Prev / next nav ── */
+  .session-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 8px; }
+  .session-nav-item { display: flex; flex-direction: column; gap: 4px; background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 18px; text-decoration: none; color: inherit; box-shadow: var(--shadow-sm); transition: all 0.15s var(--ease); }
+  .session-nav-item:hover { border-color: rgba(40,123,232,0.3); box-shadow: 0 4px 16px rgba(4,16,45,0.09); transform: translateY(-1px); }
+  .session-nav-item.next { align-items: flex-end; text-align: right; }
+  .nav-dir { font-size: 10px; font-weight: 700; letter-spacing: 0.7px; text-transform: uppercase; color: var(--text-muted); }
+  .nav-title { font-size: 13px; font-weight: 700; color: var(--text-primary); line-height: 1.35; }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .page-main { padding: 70px 20px 80px; }
+    .mission-body { grid-template-columns: 1fr; }
+    .topbar-nav { display: none; }
+    .topbar-right { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ TOPBAR ═══ -->
+<!-- Set one tnav-link to class="tnav-link active" for the current section -->
+<div class="topbar">
+  <a href="../index.html" class="topbar-brand">AI Officer <span>Institute</span></a><!-- ← adjust depth -->
+  <button class="nav-toggle" id="navToggle" onclick="var n=this.closest('div.topbar').querySelector('.topbar-nav');n.classList.toggle('open');this.textContent=n.classList.contains('open')?'✕':'☰';" aria-label="Toggle navigation">☰</button>
+  <nav class="topbar-nav">
+    <a href="../certification.html" class="tnav-link"><span class="tnav-dot" style="background:#287BE8"></span> Certification</a>
+    <a href="../coaching.html" class="tnav-link"><span class="tnav-dot" style="background:#287BE8"></span> Coaching</a>
+    <a href="index.html" class="tnav-link active"><span class="tnav-dot" style="background:#1A9E74"></span> Micro-Sessions</a>
+    <a href="../blog/index.html" class="tnav-link"><span class="tnav-dot" style="background:#6FF2C1"></span> Blog</a>
+    <a href="../my-team.html" class="tnav-link"><span class="tnav-dot" style="background:#8b91ac"></span> My Team</a>
+  </nav>
+  <div class="topbar-right">
+    <a href="../ai-buddy.html" class="buddy-launch-btn">AI Buddy</a>
+    <div class="topbar-stat">🔥 7</div>
+    <div class="topbar-stat">1,240 xp</div>
+    <div class="topbar-divider"></div>
+    <div class="topbar-avatar">DH</div>
+  </div>
+</div>
+
+<!-- ═══ NO HERO on sub-pages — content starts directly in <main> ═══ -->
+
+<main class="page-main site-wrap">
+
+  <!-- ── Breadcrumb — ALWAYS the first element inside <main> ── -->
+  <!-- Update href and label to match parent section:
+       micro-sessions/ → "← Micro-Sessions"
+       blog/posts/     → "← Blog"
+       generative-ai/  → "← Certification"
+  -->
+  <a href="index.html" class="mission-back">← Micro-Sessions</a>
+
+  <!-- ── Page header ── -->
+  <div class="mission-header">
+    <div class="mission-meta">
+      <!--
+        Track pill options — pick one and delete the others:
+
+        Generative AI:
+        <span class="mission-track-pill" style="background:rgba(209,69,139,0.1); color:#D1458B; border:1px solid rgba(209,69,139,0.2);"><span class="dot" style="background:#D1458B;"></span> Gen AI</span>
+
+        Agentic AI:
+        <span class="mission-track-pill" style="background:rgba(40,123,232,0.1); color:#287BE8; border:1px solid rgba(40,123,232,0.2);"><span class="dot" style="background:#287BE8;"></span> Agentic AI</span>
+
+        Leadership:
+        <span class="mission-track-pill" style="background:rgba(26,158,116,0.1); color:#1a9e74; border:1px solid rgba(26,158,116,0.2);"><span class="dot" style="background:#1a9e74;"></span> Leadership</span>
+      -->
+      <span class="mission-track-pill" style="background:rgba(40,123,232,0.1); color:#287BE8; border:1px solid rgba(40,123,232,0.2);">
+        <span class="dot" style="background:#287BE8;"></span> Agentic AI
+      </span>
+    </div>
+    <h1 class="mission-title">PLACEHOLDER Page Title</h1>
+    <p class="mission-sub">PLACEHOLDER · Sub-section descriptor or one-line summary</p>
+  </div>
+
+  <!-- ── Two-column body ── -->
+  <div class="mission-body">
+
+    <!-- ── Main content column ── -->
+    <div>
+
+      <!-- Objective card -->
+      <div class="content-card">
+        <div class="card-label">Session Objective</div>
+        <p class="card-text">PLACEHOLDER — what this session covers and what the learner will be able to do.</p>
+      </div>
+
+      <!-- Challenge card -->
+      <div class="content-card">
+        <div class="card-label">Your Challenge</div>
+        <div class="card-heading">Complete the following steps</div>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-num">STEP 1</div>
+            <div class="step-body">
+              <div class="step-title">PLACEHOLDER step title (X min)</div>
+              <div class="step-desc">PLACEHOLDER step description.</div>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">STEP 2</div>
+            <div class="step-body">
+              <div class="step-title">PLACEHOLDER step title (X min)</div>
+              <div class="step-desc">PLACEHOLDER step description.</div>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">STEP 3</div>
+            <div class="step-body">
+              <div class="step-title">PLACEHOLDER step title (X min)</div>
+              <div class="step-desc">PLACEHOLDER step description.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit box -->
+        <div class="submit-box">
+          <div class="submit-box-title">What to Submit to Your AI Buddy</div>
+          <div class="submit-list">
+            <div class="submit-item"><div class="submit-dot"></div><span><strong>PLACEHOLDER submit item 1</strong></span></div>
+            <div class="submit-item"><div class="submit-dot"></div><span><strong>PLACEHOLDER submit item 2</strong></span></div>
+            <div class="submit-item"><div class="submit-dot"></div><span><strong>PLACEHOLDER submit item 3</strong></span></div>
+          </div>
+        </div>
+      </div><!-- /.challenge card -->
+
+      <!-- Additional content cards as needed -->
+      <!--
+      <div class="content-card">
+        <div class="card-label">PLACEHOLDER LABEL</div>
+        <p class="card-text">PLACEHOLDER content.</p>
+      </div>
+      -->
+
+      <!-- Prev / next navigation -->
+      <div class="session-nav">
+        <a href="PLACEHOLDER-prev.html" class="session-nav-item">
+          <div class="nav-dir">← Previous</div>
+          <div class="nav-title">PLACEHOLDER Previous Page</div>
+        </a>
+        <a href="PLACEHOLDER-next.html" class="session-nav-item next">
+          <div class="nav-dir">Next →</div>
+          <div class="nav-title">PLACEHOLDER Next Page</div>
+        </a>
+      </div>
+
+    </div><!-- /.main column -->
+
+    <!-- ── Resource sidebar ── -->
+    <!-- Add class="active" to the card that matches the CURRENT page -->
+    <!-- Resource icon background colour matches the track -->
+    <div>
+      <div class="resource-stack">
+
+        <a href="PLACEHOLDER-SLUG.html" class="resource-card active">
+          <div class="resource-icon" style="background:rgba(40,123,232,0.1);">📄</div>
+          <div class="resource-info">
+            <div class="resource-tag">Overview</div>
+            <div class="resource-title">Session Overview</div>
+          </div>
+          <div class="resource-arrow">→</div>
+        </a>
+
+        <a href="PLACEHOLDER-SLUG-video.html" class="resource-card">
+          <div class="resource-icon" style="background:rgba(40,123,232,0.1);">▶</div>
+          <div class="resource-info">
+            <div class="resource-tag">Video</div>
+            <div class="resource-title">Watch the Session</div>
+          </div>
+          <div class="resource-arrow">→</div>
+        </a>
+
+        <a href="PLACEHOLDER-SLUG-slides.html" class="resource-card">
+          <div class="resource-icon" style="background:rgba(209,69,139,0.1);">📊</div>
+          <div class="resource-info">
+            <div class="resource-tag">Slides</div>
+            <div class="resource-title">View the Slides</div>
+          </div>
+          <div class="resource-arrow">→</div>
+        </a>
+
+        <a href="PLACEHOLDER-SLUG-recap.html" class="resource-card">
+          <div class="resource-icon" style="background:rgba(26,158,116,0.1);">📝</div>
+          <div class="resource-info">
+            <div class="resource-tag">Recap</div>
+            <div class="resource-title">Session Recap</div>
+          </div>
+          <div class="resource-arrow">→</div>
+        </a>
+
+        <a href="PLACEHOLDER-SLUG-resources.html" class="resource-card">
+          <div class="resource-icon" style="background:rgba(111,242,193,0.15);">🔗</div>
+          <div class="resource-info">
+            <div class="resource-tag">Resources</div>
+            <div class="resource-title">Links &amp; Resources</div>
+          </div>
+          <div class="resource-arrow">→</div>
+        </a>
+
+        <a href="PLACEHOLDER-SLUG-prompts.html" class="resource-card">
+          <div class="resource-icon" style="background:rgba(4,16,45,0.07);">💬</div>
+          <div class="resource-info">
+            <div class="resource-tag">Prompts</div>
+            <div class="resource-title">Session Prompts</div>
+          </div>
+          <div class="resource-arrow">→</div>
+        </a>
+
+      </div><!-- /.resource-stack -->
+    </div><!-- /.sidebar -->
+
+  </div><!-- /.mission-body -->
+
+</main><!-- /.page-main -->
+
+</body>
+</html>

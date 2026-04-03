@@ -48,7 +48,7 @@ Issues are rated **P0 / P1 / P2 / P3** (P0 = ship blocker, P3 = polish). Test ca
 - AC-MOB-HOME-1: Hero card (progress summary) stacks vertically on mobile with no truncation.
 - AC-MOB-HOME-2: All grid sections (Up Next cards, track cards, leaderboard) collapse to single-column on mobile.
 - AC-MOB-HOME-3: The AI Buddy FAB does not cover primary CTAs or critical content at 375px.
-- AC-MOB-HOME-4: Stats row (Missions, CAIO Coaching, Rank) wraps or stacks cleanly.
+- AC-MOB-HOME-4: Stats row (Missions, AIO Labs, Rank) wraps or stacks cleanly.
 
 ### Test Cases
 
@@ -56,7 +56,7 @@ Issues are rated **P0 / P1 / P2 / P3** (P0 = ship blocker, P3 = polish). Test ca
 |----|----------|------------|------|----------|--------|
 | T-MOB-HOME-01 | P1 | 375px | Load index.html. Check hero card. | `.hero-inner { flex-direction: column }`. h1 wraps cleanly. No horizontal scroll. | — |
 | T-MOB-HOME-02 | P1 | 375px | Check Up Next cards and track cards. | `.grid-2, .grid-3 { grid-template-columns: 1fr }`. Cards stack vertically. | — |
-| T-MOB-HOME-03 | P1 | 375px | Check stats row (Missions / CAIO Coaching / Rank). | `.stats-row { flex-direction: column }`. No truncation. | — |
+| T-MOB-HOME-03 | P1 | 375px | Check stats row (Missions / AIO Labs / Rank). | `.stats-row { flex-direction: column }`. No truncation. | — |
 | T-MOB-HOME-04 | P2 | 375px | Scroll to bottom. Check AI Buddy FAB (bottom-right, fixed). | FAB visible and accessible. Does not obscure the last card or footer. | — |
 | T-MOB-HOME-05 | P2 | 375px | Open AI Buddy panel (tap FAB). | Panel opens. Chat input accessible above keyboard. No content cut off. | — |
 | T-MOB-HOME-06 | P3 | 375px | Check hero video element. | `.hero-video { display: none }` at 900px. No broken image or whitespace gap. | — |
@@ -77,14 +77,14 @@ Issues are rated **P0 / P1 / P2 / P3** (P0 = ship blocker, P3 = polish). Test ca
 | ID | Priority | Breakpoint | Test | Expected | Status |
 |----|----------|------------|------|----------|--------|
 | T-MOB-CERT-01 | P1 | 375px | Load certification.html. Check mission grid. | `mgrid { grid-template-columns: 1fr }`. All mission cards stack. | — |
-| T-MOB-CERT-02 | P1 | 375px | Check support cards (Micro-Sessions, CAIO Coaching). | `support-grid { grid-template-columns: 1fr }`. Cards stack. | — |
+| T-MOB-CERT-02 | P1 | 375px | Check support cards (Micro-Sessions, AIO Labs). | `support-grid { grid-template-columns: 1fr }`. Cards stack. | — |
 | T-MOB-CERT-03 | P1 | 375px | Check journey hero section. | `flex-direction: column`. h1 font-size 26px. No text truncation. | — |
 | T-MOB-CERT-04 | P2 | 375px | Check page-main top padding. | `padding-top: 70px` clears the fixed topbar (56px). Content not obscured. | — |
 | T-MOB-CERT-05 | P2 | 768px | Resize to 768px (tablet). Check mission grid. | Grid holds 2-column layout comfortably, or collapses cleanly. | — |
 
 ---
 
-## Section 4 — CAIO Coaching (coaching.html)
+## Section 4 — AIO Labs (coaching.html)
 
 ### Acceptance Criteria
 

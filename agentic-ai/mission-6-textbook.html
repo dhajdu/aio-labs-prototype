@@ -237,7 +237,7 @@ Success metrics. The baseline before deployment. The target improvement. The wee
 <p><strong>What It Is:</strong> This system qualifies inbound leads by analyzing company profile, engagement level, and fit with our target customer profile, then routes leads to the right sales representative with a qualification summary.</p>
 <p><strong>Why It Matters:</strong> Current process: 4 hours per lead, handled manually. Target: 45 minutes per lead, 80% routing accuracy. Annual impact: 250 hours reclaimed for high-value selling activity.</p>
 <p><strong>What It Needs:</strong> Production version to be built on company infrastructure. Data sources: Salesforce CRM (customer records), Google Drive knowledge base (qualification criteria), LinkedIn data API. Guardrails to be implemented technically by engineering. Monitoring dashboard to surface weekly accuracy metrics.</p>
-<p><strong>Who Owns It:</strong> Revenue Operations Manager owns governance. CAIO approves changes to guardrails. IT maintains infrastructure. Quarterly leadership review.</p>
+<p><strong>Who Owns It:</strong> Revenue Operations Manager owns governance. AIO Labs approves changes to guardrails. IT maintains infrastructure. Quarterly leadership review.</p>
 <p><strong>Who Runs It:</strong> Sales operations team (3 users). 2-hour onboarding. Written guide maintained by system owner.</p>
 <p><strong>How You Know:</strong> Baseline: 4 hours. Target: 45 minutes. Weekly metrics: qualification accuracy, average qualification time. Threshold: accuracy below 70% for 2 weeks triggers audit.</p>
 <p><strong>Starter Prompt for Your AI Buddy</strong></p>
@@ -265,13 +265,13 @@ The guardrails you wrote in Mission 5 become official organizational policy here
 How often does the AI Officer review performance? Who do they escalate to if something is wrong? When does the AI Officer bring the engineer back in? This is the ongoing governance loop - AI Officer reviews metrics, identifies issues, decides whether they require a business response (change the process) or a technical response (change the system), and coordinates accordingly.</p>
 <p><strong>Worked Example: Governance Section</strong></p>
 <p><strong>System Owner:</strong> Revenue Operations Manager (Sarah Chen)
-Sarah is accountable for the system's business performance. She reviews weekly metrics and owns the decision to change guardrails or escalation criteria. Changes to guardrails require CAIO approval and then go to engineering to implement technically.</p>
+Sarah is accountable for the system's business performance. She reviews weekly metrics and owns the decision to change guardrails or escalation criteria. Changes to guardrails require AIO Labs approval and then go to engineering to implement technically.</p>
 <p><strong>What it can do:</strong>
 Qualify leads using the defined criteria. Route leads to the right representative. Generate qualification summaries. Flag incomplete profiles for human review.</p>
 <p><strong>What it cannot do:</strong>
 Make final decisions on accounts over $50K. Share pricing or terms with prospects. Access payment data. Override a sales representative's own lead assessment.</p>
 <p><strong>Oversight model:</strong>
-Weekly metric review by Sarah (Revenue Operations Manager). Monthly guardrail review by CAIO. Any accuracy issue below threshold triggers a conversation between Sarah and engineering to determine whether the fix is a business change or a technical one. Quarterly review by leadership.</p>
+Weekly metric review by Sarah (Revenue Operations Manager). Monthly guardrail review by AIO Labs. Any accuracy issue below threshold triggers a conversation between Sarah and engineering to determine whether the fix is a business change or a technical one. Quarterly review by leadership.</p>
 <div class="key-insight"><div class="key-insight-label">Key Insight</div><p></p></div>
 <p>"Governance defines the ongoing relationship between the AI Officer and the AI Engineer after deployment. The officer owns the business requirements. The engineer owns the technical implementation. Governance keeps them aligned."</p>
 <h4>Brief 4: Training, Handoff, and Success Metrics</h4>
