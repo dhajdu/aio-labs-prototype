@@ -338,5 +338,236 @@ function toggleNotes(btn) {
   btn.nextElementSibling.classList.toggle('open');
 }
 </script>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- PERSISTENT AI BUDDY — SESSION COMPANION      -->
+    <!-- ═══════════════════════════════════════════ -->
+    <style>
+      .article-buddy-fab {
+        position: fixed; bottom: 28px; right: 28px; z-index: 1000;
+        display: flex; align-items: center; gap: 10px;
+        background: var(--navy);
+        border: 1px solid rgba(111,242,193,0.3);
+        border-radius: 50px;
+        padding: 11px 20px 11px 12px;
+        cursor: pointer;
+        box-shadow: 0 8px 32px rgba(4,16,45,0.28);
+        transition: all 0.2s ease;
+        font-family: 'Inter', sans-serif;
+        font-size: 14px; font-weight: 600;
+        color: white; user-select: none;
+        animation: buddy-intro 0.6s 1.5s both cubic-bezier(0.34,1.56,0.64,1);
+      }
+      @keyframes buddy-intro {
+        from { opacity: 0; transform: translateY(20px) scale(0.9); }
+        to   { opacity: 1; transform: translateY(0) scale(1); }
+      }
+      .article-buddy-fab:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(4,16,45,0.35); border-color: rgba(111,242,193,0.5); }
+      .article-buddy-avatar {
+        width: 32px; height: 32px; border-radius: 50%;
+        background: linear-gradient(135deg, #287BE8, #1A9E74);
+        display: flex; align-items: center; justify-content: center;
+        overflow: hidden; flex-shrink: 0;
+      }
+      .article-buddy-avatar img { width: 100%; height: 100%; object-fit: cover; }
+      .article-buddy-pulse {
+        width: 8px; height: 8px; border-radius: 50%;
+        background: #6FF2C1; margin-left: 2px;
+        animation: ab-pulse 2s infinite;
+      }
+      @keyframes ab-pulse {
+        0%   { box-shadow: 0 0 0 0 rgba(111,242,193,0.5); }
+        70%  { box-shadow: 0 0 0 6px rgba(111,242,193,0); }
+        100% { box-shadow: 0 0 0 0 rgba(111,242,193,0); }
+      }
+      .article-buddy-panel {
+        position: fixed; bottom: 88px; right: 28px; z-index: 999;
+        width: 380px; height: 520px;
+        background: white;
+        border: 1px solid #e2e5f0;
+        border-radius: 16px;
+        box-shadow: 0 16px 56px rgba(4,16,45,0.18);
+        display: none; flex-direction: column; overflow: hidden;
+        font-family: 'Inter', sans-serif;
+      }
+      .article-buddy-panel.open {
+        display: flex;
+        animation: ab-slide-in 0.2s ease both;
+      }
+      @keyframes ab-slide-in {
+        from { opacity: 0; transform: translateY(12px) scale(0.97); }
+        to   { opacity: 1; transform: translateY(0) scale(1); }
+      }
+      .ab-head {
+        background: #04102d; padding: 14px 18px;
+        display: flex; align-items: center; gap: 12px; flex-shrink: 0;
+      }
+      .ab-head-avatar {
+        width: 36px; height: 36px; border-radius: 50%;
+        background: linear-gradient(135deg, #287BE8, #1A9E74);
+        overflow: hidden; flex-shrink: 0;
+        display: flex; align-items: center; justify-content: center; font-size: 18px;
+      }
+      .ab-head-avatar img { width: 100%; height: 100%; object-fit: cover; }
+      .ab-head-info { flex: 1; }
+      .ab-head-name { font-size: 14px; font-weight: 700; color: white; }
+      .ab-head-status { font-size: 11px; color: #6FF2C1; margin-top: 1px; }
+      .ab-head-close {
+        width: 28px; height: 28px; border-radius: 50%;
+        background: rgba(255,255,255,0.1);
+        display: flex; align-items: center; justify-content: center;
+        cursor: pointer; font-size: 14px; color: rgba(255,255,255,0.6);
+        transition: background 0.15s; flex-shrink: 0; border: none;
+      }
+      .ab-head-close:hover { background: rgba(255,255,255,0.2); color: white; }
+      .ab-context {
+        background: #f8f9fc; border-bottom: 1px solid #e2e5f0;
+        padding: 10px 16px; flex-shrink: 0;
+        display: flex; align-items: center; gap: 8px;
+        font-size: 11px; color: #6b7280;
+      }
+      .ab-context-dot { width: 6px; height: 6px; border-radius: 50%; background: #287BE8; flex-shrink: 0; }
+      .ab-context-text { font-weight: 500; }
+      .ab-msgs {
+        flex: 1; padding: 14px 14px 8px; display: flex; flex-direction: column; gap: 10px; overflow-y: auto;
+      }
+      .ab-msg {
+        max-width: 88%; padding: 10px 13px; border-radius: 12px;
+        font-size: 13px; line-height: 1.55;
+      }
+      .ab-msg.from-buddy {
+        background: #f3f4f8; border: 1px solid #e2e5f0;
+        color: #1a1f36; align-self: flex-start; border-bottom-left-radius: 3px;
+      }
+      .ab-msg.from-user {
+        background: #04102d; color: rgba(255,255,255,0.9);
+        align-self: flex-end; border-bottom-right-radius: 3px;
+      }
+      .ab-msg-name { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #9ca3af; margin-bottom: 4px; }
+      .ab-chips {
+        padding: 0 12px 10px; display: flex; flex-wrap: wrap; gap: 6px; flex-shrink: 0;
+      }
+      .ab-chip {
+        font-size: 12px; font-weight: 500; padding: 5px 12px;
+        border-radius: 20px; border: 1px solid #d1d9f0; background: white;
+        color: #4a5568; cursor: pointer; transition: all 0.15s; font-family: 'Inter', sans-serif;
+      }
+      .ab-chip:hover { background: #eef2ff; border-color: #287BE8; color: #287BE8; }
+      .ab-input-row {
+        padding: 12px 14px; border-top: 1px solid #e2e5f0;
+        display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+      }
+      .ab-input {
+        flex: 1; background: #f3f4f8; border: 1px solid #e2e5f0;
+        border-radius: 8px; padding: 9px 12px;
+        font-size: 13px; color: #1a1f36; font-family: 'Inter', sans-serif;
+        outline: none; transition: border-color 0.15s;
+      }
+      .ab-input:focus { border-color: #287BE8; background: white; }
+      .ab-input::placeholder { color: #9ca3af; }
+      .ab-send {
+        width: 34px; height: 34px; border-radius: 8px;
+        background: #04102d; border: none; cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        color: white; font-size: 15px; transition: background 0.15s; flex-shrink: 0;
+      }
+      .ab-send:hover { background: #287BE8; }
+    </style>
+
+    <!-- FAB Button -->
+    <div class="article-buddy-fab" id="abFab" onclick="toggleArticleBuddy()">
+      <div class="article-buddy-avatar">
+        <img src="../images/AI Buddy - Officer.png" alt="AI Buddy" onerror="this.style.display='none';this.parentElement.textContent='🤖'">
+      </div>
+      Discuss this session
+      <div class="article-buddy-pulse"></div>
+    </div>
+
+    <!-- Panel -->
+    <div class="article-buddy-panel open" id="abPanel">
+      <div class="ab-head">
+        <div class="ab-head-avatar">
+          <img src="../images/AI Buddy - Officer.png" alt="AI Buddy" onerror="this.style.display='none';this.parentElement.textContent='🤖'">
+        </div>
+        <div class="ab-head-info">
+          <div class="ab-head-name">AI Buddy</div>
+          <div class="ab-head-status">● Ready to help with this session</div>
+        </div>
+        <button class="ab-head-close" onclick="toggleArticleBuddy()">✕</button>
+      </div>
+
+      <div class="ab-context">
+        <span class="ab-context-dot"></span>
+        <span class="ab-context-text">The Command Line · Micro-Session</span>
+      </div>
+
+      <div class="ab-msgs" id="abMsgs">
+        <div class="ab-msg from-buddy">
+          <div class="ab-msg-name">AI Buddy</div>
+          Hey! 👋 I've reviewed this session and I'm ready to go deeper with you. Here's what we're covering:
+        </div>
+        <div class="ab-msg from-buddy">
+          <div class="ab-msg-name">AI Buddy</div>
+          <strong>🖥️ The command line is the door to every powerful AI tool:</strong> Claude Code, local LLMs, automation scripts, and deployment pipelines all live here. Non-coders who learn it unlock an asymmetric advantage.
+        </div>
+        <div class="ab-msg from-buddy">
+          <div class="ab-msg-name">AI Buddy</div>
+          <strong>⚡ You don't need to memorize it:</strong> AI can write and explain every command you need. The skill is knowing what to ask for — and not being afraid of the terminal when it gives you an error.
+        </div>
+        <div class="ab-msg from-buddy">
+          <div class="ab-msg-name">AI Buddy</div>
+          What do you want to dig into? Pick a question below or type your own. 👇
+        </div>
+      </div>
+
+      <div class="ab-chips">
+        <button class="ab-chip" onclick="abAsk('What are the first command line commands I should learn as an AI practitioner?')">First commands to learn</button>
+        <button class="ab-chip" onclick="abAsk('How do I use the command line to get the most out of Claude Code?')">Command line for Claude Code</button>
+        <button class="ab-chip" onclick="abAsk('What kinds of tasks can I automate directly from the command line?')">Automate from terminal</button>
+        <button class="ab-chip" onclick="abAsk('I'm intimidated by the terminal — help me get comfortable with it')">I'm scared of the terminal</button>
+      </div>
+
+      <div class="ab-input-row">
+        <input class="ab-input" id="abInput" type="text" placeholder="Ask about this session…" onkeydown="if(event.key==='Enter') abSend()">
+        <button class="ab-send" onclick="abSend()">→</button>
+      </div>
+    </div>
+
+    <script>
+      function toggleArticleBuddy() {
+        const panel = document.getElementById('abPanel');
+        const fab = document.getElementById('abFab');
+        panel.classList.toggle('open');
+        fab.style.display = panel.classList.contains('open') ? 'none' : 'flex';
+      }
+      // Hide FAB since panel starts open
+      document.getElementById('abFab').style.display = 'none';
+
+      function abAsk(text) {
+        const input = document.getElementById('abInput');
+        input.value = text;
+        abSend();
+      }
+      function abSend() {
+        const input = document.getElementById('abInput');
+        const msgs = document.getElementById('abMsgs');
+        const text = input.value.trim();
+        if (!text) return;
+        const userMsg = document.createElement('div');
+        userMsg.className = 'ab-msg from-user';
+        userMsg.textContent = text;
+        msgs.appendChild(userMsg);
+        input.value = '';
+        msgs.scrollTop = msgs.scrollHeight;
+        setTimeout(() => {
+          const reply = document.createElement('div');
+          reply.className = 'ab-msg from-buddy';
+          reply.innerHTML = '<div class="ab-msg-name">AI Buddy</div>Great question! Full AI responses are coming soon — this is where the real conversation gets interesting. 🤖';
+          msgs.appendChild(reply);
+          msgs.scrollTop = msgs.scrollHeight;
+        }, 700);
+      }
+    </script>
+
 </body>
 </html>
