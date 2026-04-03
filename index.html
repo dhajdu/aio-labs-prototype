@@ -1016,32 +1016,6 @@
     </div>
   </div>
 
-  <!-- ── PROGRESS RING ── -->
-  <div class="prog-ring-wrap">
-    <div class="prog-ring-container">
-      <svg class="prog-ring-svg" width="72" height="72" viewBox="0 0 72 72">
-        <circle class="prog-ring-track" cx="36" cy="36" r="30"/>
-        <circle class="prog-ring-fill" id="progRingFill" cx="36" cy="36" r="30"
-          stroke-dasharray="188.5" stroke-dashoffset="188.5"/>
-      </svg>
-      <div class="prog-ring-label">
-        <span class="prog-ring-pct" id="progRingPct">0%</span>
-        <span class="prog-ring-sub">CERT</span>
-      </div>
-    </div>
-    <div class="prog-ring-info">
-      <div class="prog-ring-title">AI Officer Certification · 36% complete</div>
-      <div class="prog-ring-desc">Mission 3 of Generative AI in progress — 2 tracks remaining after this.</div>
-      <div class="prog-ring-milestones">
-        <span class="prog-milestone done">✓ Gen AI Basics</span>
-        <span class="prog-milestone done">✓ Prompt Engineering</span>
-        <span class="prog-milestone active">⚡ Advanced Frameworks</span>
-        <span class="prog-milestone locked">🔒 Agentic AI</span>
-        <span class="prog-milestone locked">🔒 Leadership</span>
-      </div>
-    </div>
-  </div>
-
   <!-- ── UP NEXT ── -->
   <div class="section-header">
     <span class="section-title">Up Next</span>
@@ -1090,7 +1064,7 @@
   <!-- Read of the Week -->
   <div class="rotw-card" style="margin-top: 14px;">
     <div class="rotw-img">
-      <img src="images/PH Forum + Family Presentation - Four Offices.webp" alt="The Four Offices of the Future">
+      <img src="images/PH%20Forum%20%2B%20Family%20Presentation%20-%20Four%20Offices.webp" alt="The Four Offices of the Future">
       <div class="rotw-img-overlay"></div>
       <div class="rotw-badge"><span class="rotw-badge-dot"></span> Read of the Week</div>
     </div>
@@ -1109,129 +1083,6 @@
         <a href="blog/posts/four-offices-of-the-future.html" class="rotw-btn-read">Read Article →</a>
         <button class="rotw-btn-chat" onclick="openBuddy('Let\'s discuss The Four Offices of the Future. What are the four models and which one applies most to my work?')">💬 Discuss with AI Buddy</button>
       </div>
-    </div>
-  </div>
-
-  <!-- ── LEADERBOARD ── -->
-  <div class="section-header">
-    <span class="section-pill royal"><span class="dot"></span> Community</span>
-    <span class="section-title">Leaderboard</span>
-    <span class="section-meta"><a href="my-team.html">view all 48 →</a></span>
-  </div>
-
-  <!-- Compact rank summary -->
-  <div class="rank-strip" id="rankStrip" onclick="toggleLeaderboard()">
-    <div>
-      <div class="rank-strip-num">#12</div>
-      <div class="rank-strip-label">Your rank</div>
-    </div>
-    <div class="rank-strip-divider"></div>
-    <div class="rank-strip-stat">
-      <div class="rank-strip-stat-val">1,240</div>
-      <div class="rank-strip-stat-lbl">XP</div>
-    </div>
-    <div class="rank-strip-divider"></div>
-    <div class="rank-strip-stat">
-      <div class="rank-strip-stat-val">48</div>
-      <div class="rank-strip-stat-lbl">cadets</div>
-    </div>
-    <div class="rank-strip-divider"></div>
-    <div class="rank-strip-stat">
-      <div class="rank-strip-stat-val">60</div>
-      <div class="rank-strip-stat-lbl">XP to #11</div>
-    </div>
-    <div class="rank-strip-delta">↑ +2 this week</div>
-    <div class="rank-strip-expand">▾</div>
-  </div>
-
-  <!-- Expandable full leaderboard -->
-  <div class="leaderboard-full" id="leaderboardFull">
-    <div class="leaderboard">
-      <div class="leaderboard-row">
-        <div class="lb-rank gold">1</div>
-        <div class="lb-name">Sarah Chen</div>
-        <span class="lb-cert caio">AIO Labs Certified</span>
-        <div class="lb-pts">2,890</div>
-      </div>
-      <div class="leaderboard-row">
-        <div class="lb-rank silver">2</div>
-        <div class="lb-name">James Liu</div>
-        <span class="lb-cert officer">AI Officer Certified</span>
-        <div class="lb-pts">2,640</div>
-      </div>
-      <div class="leaderboard-row">
-        <div class="lb-rank bronze">3</div>
-        <div class="lb-name">Priya Patel</div>
-        <span class="lb-cert officer">AI Officer Certified</span>
-        <div class="lb-pts">2,310</div>
-      </div>
-      <div class="leaderboard-row" style="padding: 0 22px;"><div class="lb-gap"></div></div>
-      <div class="leaderboard-row">
-        <div class="lb-rank">11</div>
-        <div class="lb-name">Ryan Park</div>
-        <span class="lb-cert agentic">Agentic AI Specialist</span>
-        <div class="lb-pts">1,320</div>
-      </div>
-      <div class="leaderboard-row you">
-        <div class="lb-rank" style="color: var(--blue); font-weight: 700;">12</div>
-        <div class="lb-name">Dave Hajdu <span class="lb-you">YOU</span></div>
-        <span class="lb-cert gen-ai">Generative AI Specialist</span>
-        <div class="lb-pts" style="color: var(--blue);">1,240</div>
-      </div>
-      <div class="leaderboard-row">
-        <div class="lb-rank">13</div>
-        <div class="lb-name">Cadet</div>
-        <span class="lb-cert gen-ai">Generative AI Specialist</span>
-        <div class="lb-pts">1,180</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── YOUR TRACKS ── -->
-  <div class="section-header">
-    <span class="section-pill fuchsia"><span class="dot"></span> Progress</span>
-    <span class="section-title">Your Tracks</span>
-  </div>
-
-  <div class="grid-3">
-    <a href="generative-ai/index.html" class="track-card active-track" style="text-decoration:none; display:block;">
-      <span class="track-card-icon">🧠</span>
-      <div class="track-card-top">
-        <span class="badge badge-fuchsia">Active</span>
-        <span class="track-card-pct" style="color: var(--text-primary);">65%</span>
-      </div>
-      <div class="track-card-name">Generative AI</div>
-      <div style="margin: 8px 0;">
-        <div class="progress" style="height: 5px;"><div class="progress-fill navy" style="width: 65%;"></div></div>
-      </div>
-      <div class="track-card-meta">4 of 6 missions · AI Officer</div>
-    </a>
-
-    <a href="agentic-ai/index.html" class="track-card locked-track" style="text-decoration:none; display:block;">
-      <span class="track-card-icon" style="opacity:0.4">🤖</span>
-      <div class="track-card-top">
-        <span class="badge badge-royal">Locked</span>
-        <span class="track-card-pct" style="color: var(--text-muted);">0%</span>
-      </div>
-      <div class="track-card-name">Agentic AI</div>
-      <div style="margin: 8px 0;">
-        <div class="progress" style="height: 5px;"><div class="progress-fill royal" style="width: 0%;"></div></div>
-      </div>
-      <div class="track-card-meta">0 of 5 missions · AI Officer</div>
-    </a>
-
-    <div class="track-card locked-track" style="opacity: 0.55; cursor: default;">
-      <span class="track-card-icon" style="opacity:0.4">🏆</span>
-      <div class="track-card-top">
-        <span class="badge badge-mint">Locked</span>
-        <span class="track-card-pct" style="color: var(--text-muted);">0%</span>
-      </div>
-      <div class="track-card-name">Leadership</div>
-      <div style="margin: 4px 0 8px; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: var(--text-muted);">Masters · AIO Labs Certification</div>
-      <div style="margin: 8px 0;">
-        <div class="progress" style="height: 5px;"><div class="progress-fill mint" style="width: 0%;"></div></div>
-      </div>
-      <div class="track-card-meta" style="color: var(--text-muted);">Unlocks after AI Officer</div>
     </div>
   </div>
 
