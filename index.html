@@ -291,35 +291,94 @@
   }
   .upnext-card:hover .upnext-arrow { color: var(--blue); transform: translateX(3px); }
 
-  /* ── Blog row ── */
+  /* ── Blog row (legacy, kept for other pages) ── */
   .blog-row {
-    background: var(--bg-white);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 18px 22px;
+    background: var(--bg-white); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 18px 22px;
     display: flex; align-items: center; gap: 16px;
-    transition: all 0.2s var(--ease);
-    box-shadow: var(--shadow-sm);
+    transition: all 0.2s var(--ease); box-shadow: var(--shadow-sm);
     color: inherit; text-decoration: none;
   }
-  .blog-row:hover {
-    border-color: var(--border-hover);
-    box-shadow: var(--shadow-card-hover);
-    transform: translateY(-1px);
-  }
-  .blog-row-dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--mint-dark); flex-shrink: 0;
-  }
+  .blog-row:hover { border-color: var(--border-hover); box-shadow: var(--shadow-card-hover); transform: translateY(-1px); }
+  .blog-row-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--mint-dark); flex-shrink: 0; }
   .blog-row-body { flex: 1; min-width: 0; }
-  .blog-row-eyebrow {
-    font-size: 10px; font-weight: 700; letter-spacing: 0.5px;
-    text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 2px;
-  }
+  .blog-row-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 2px; }
   .blog-row-title { font-size: 15px; font-weight: 600; color: var(--text-primary); }
-  .blog-row-date {
-    font-size: 11px; color: var(--text-tertiary);
-    font-family: 'JetBrains Mono', monospace; flex-shrink: 0;
+  .blog-row-date { font-size: 11px; color: var(--text-tertiary); font-family: 'JetBrains Mono', monospace; flex-shrink: 0; }
+
+  /* ── Read of the Week feature card ── */
+  .rotw-card {
+    background: var(--bg-white); border: 1px solid var(--border);
+    border-radius: 14px; overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.2s var(--ease);
+    display: grid; grid-template-columns: 1fr 1.1fr;
+  }
+  .rotw-card:hover { box-shadow: var(--shadow-card-hover); border-color: var(--border-hover); }
+  .rotw-img {
+    position: relative; overflow: hidden; min-height: 220px;
+  }
+  .rotw-img img {
+    width: 100%; height: 100%; object-fit: cover;
+    display: block; transition: transform 0.4s var(--ease);
+  }
+  .rotw-card:hover .rotw-img img { transform: scale(1.04); }
+  .rotw-img-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(4,16,45,0.35) 0%, rgba(40,123,232,0.15) 100%);
+  }
+  .rotw-badge {
+    position: absolute; top: 14px; left: 14px;
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--navy); color: #6FF2C1;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.8px;
+    text-transform: uppercase; padding: 5px 11px; border-radius: 20px;
+    border: 1px solid rgba(111,242,193,0.3);
+  }
+  .rotw-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #6FF2C1; animation: buddy-pulse 2s infinite; }
+  .rotw-body {
+    padding: 24px 26px; display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .rotw-eyebrow {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.8px;
+    text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .rotw-eyebrow-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--mint-dark); }
+  .rotw-title {
+    font-size: 18px; font-weight: 700; color: var(--text-primary);
+    line-height: 1.3; margin-bottom: 10px; letter-spacing: -0.2px;
+  }
+  .rotw-desc {
+    font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 18px; flex: 1;
+  }
+  .rotw-meta {
+    display: flex; align-items: center; gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--text-muted); margin-bottom: 18px;
+  }
+  .rotw-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  .rotw-btn-read {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--navy); color: white;
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+    padding: 9px 18px; border-radius: 8px; text-decoration: none;
+    transition: all 0.15s; border: none; cursor: pointer;
+  }
+  .rotw-btn-read:hover { background: var(--blue); transform: translateY(-1px); }
+  .rotw-btn-chat {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(40,123,232,0.08); color: var(--blue);
+    border: 1px solid rgba(40,123,232,0.2);
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+    padding: 9px 18px; border-radius: 8px; text-decoration: none;
+    transition: all 0.15s; cursor: pointer;
+  }
+  .rotw-btn-chat:hover { background: rgba(40,123,232,0.15); border-color: var(--blue); transform: translateY(-1px); }
+
+  @media (max-width: 700px) {
+    .rotw-card { grid-template-columns: 1fr; }
+    .rotw-img { min-height: 160px; }
   }
 
   /* ── Leaderboard ── */
@@ -466,7 +525,8 @@
   }
   .buddy-panel {
     position: fixed; bottom: 92px; right: 28px; z-index: 999;
-    width: 340px;
+    width: 380px;
+    height: 520px;
     background: var(--bg-white);
     border: 1px solid var(--border);
     border-radius: 16px;
@@ -481,12 +541,16 @@
   .buddy-panel-head {
     background: var(--navy); padding: 14px 18px;
     display: flex; align-items: center; gap: 12px;
+    flex-shrink: 0;
   }
   .buddy-panel-head-avatar {
     width: 36px; height: 36px; border-radius: 50%;
     background: linear-gradient(135deg, #287BE8, #1A9E74);
     display: flex; align-items: center; justify-content: center;
-    font-size: 18px; flex-shrink: 0;
+    font-size: 18px; flex-shrink: 0; overflow: hidden;
+  }
+  .buddy-panel-head-avatar img {
+    width: 100%; height: 100%; object-fit: cover;
   }
   .buddy-panel-head-info { flex: 1; }
   .buddy-panel-head-name { font-size: 14px; font-weight: 700; color: var(--white); }
@@ -501,7 +565,7 @@
   .buddy-panel-close:hover { background: rgba(255,255,255,0.2); color: white; }
   .buddy-panel-msgs {
     flex: 1; padding: 16px; display: flex; flex-direction: column; gap: 10px;
-    min-height: 180px; max-height: 280px; overflow-y: auto;
+    overflow-y: auto;
   }
   .buddy-msg {
     max-width: 85%; padding: 10px 14px; border-radius: 12px;
@@ -540,6 +604,318 @@
   }
   .buddy-send-btn:hover { background: var(--blue); }
 
+  /* ══════════════════════════════════════════
+     AI GREETING STRIP
+  ══════════════════════════════════════════ */
+  .ai-greeting {
+    display: flex; gap: 14px; align-items: center;
+    background: var(--navy);
+    border-radius: 16px;
+    padding: 16px 22px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .ai-greeting::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(40,123,232,0.12) 0%, rgba(26,158,116,0.08) 100%);
+    pointer-events: none;
+  }
+  .ai-greeting-avatar-wrap {
+    position: relative; flex-shrink: 0;
+  }
+  .ai-greeting-avatar {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: linear-gradient(135deg, #287BE8, #1A9E74);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; overflow: hidden;
+  }
+  .ai-greeting-avatar img {
+    width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+  }
+  .ai-status-dot {
+    position: absolute; bottom: 1px; right: 1px;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: #6FF2C1;
+    border: 2px solid var(--navy);
+    animation: buddy-pulse 2s infinite;
+  }
+  .ai-greeting-body { flex: 1; min-width: 0; position: relative; }
+  .ai-greeting-meta {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.4px;
+    color: #6FF2C1; margin-bottom: 4px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .ai-greeting-meta span { color: rgba(255,255,255,0.3); font-weight: 400; }
+  .ai-greeting-text {
+    font-size: 15px; font-weight: 500;
+    color: rgba(255,255,255,0.92);
+    line-height: 1.5;
+    margin-bottom: 12px;
+    min-height: 22px;
+  }
+  .ai-cursor {
+    display: inline-block;
+    width: 2px; height: 18px;
+    background: #6FF2C1;
+    margin-left: 2px;
+    vertical-align: middle;
+    animation: blink 0.8s step-end infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+  .ai-chips {
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .ai-chip {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 7px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 500;
+    color: rgba(255,255,255,0.8);
+    cursor: pointer;
+    transition: all 0.15s var(--ease);
+  }
+  .ai-chip:hover {
+    background: rgba(40,123,232,0.3);
+    border-color: rgba(40,123,232,0.6);
+    color: white; transform: translateY(-1px);
+  }
+  .ai-chip.primary {
+    background: var(--blue); border-color: var(--blue); color: white;
+  }
+  .ai-chip.primary:hover { background: #1a6fd4; }
+
+  /* ══════════════════════════════════════════
+     CMD+K COMMAND BAR
+  ══════════════════════════════════════════ */
+  .cmd-hint {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--text-muted);
+    background: var(--bg-white);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: all 0.15s; user-select: none;
+    margin-left: auto;
+  }
+  .cmd-hint:hover { border-color: var(--blue); color: var(--blue); }
+  .cmd-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(4,16,45,0.5); z-index: 2000;
+    backdrop-filter: blur(2px);
+  }
+  .cmd-overlay.open { display: block; }
+  .cmd-bar {
+    display: none; position: fixed; top: 20%; left: 50%;
+    transform: translateX(-50%);
+    width: 540px; max-width: calc(100vw - 40px);
+    z-index: 2001;
+    background: var(--bg-white);
+    border: 1px solid var(--border-hover);
+    border-radius: 14px;
+    box-shadow: 0 24px 80px rgba(4,16,45,0.22);
+    overflow: hidden;
+  }
+  .cmd-bar.open { display: block; animation: cmd-in 0.15s var(--ease); }
+  @keyframes cmd-in {
+    from { opacity: 0; transform: translateX(-50%) translateY(-8px) scale(0.98); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+  }
+  .cmd-bar-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px 18px; border-bottom: 1px solid var(--border);
+  }
+  .cmd-bar-icon { font-size: 16px; color: var(--text-muted); flex-shrink: 0; }
+  .cmd-bar-input {
+    flex: 1; border: none; outline: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px; font-weight: 500;
+    color: var(--text-primary); background: transparent;
+  }
+  .cmd-bar-input::placeholder { color: var(--text-muted); }
+  .cmd-bar-esc {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; color: var(--text-muted);
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 4px; padding: 2px 7px; flex-shrink: 0;
+  }
+  .cmd-section-label {
+    padding: 10px 18px 4px;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.8px;
+    text-transform: uppercase; color: var(--text-muted);
+  }
+  .cmd-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 18px; cursor: pointer; transition: background 0.1s;
+  }
+  .cmd-item:hover, .cmd-item.active { background: var(--surface); }
+  .cmd-item-icon {
+    width: 30px; height: 30px; border-radius: 8px;
+    background: var(--surface); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; flex-shrink: 0;
+  }
+  .cmd-item-body { flex: 1; min-width: 0; }
+  .cmd-item-title { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+  .cmd-item-sub { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+  .cmd-item-tag {
+    font-size: 10px; color: var(--text-muted);
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 4px; padding: 2px 7px; flex-shrink: 0;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .cmd-bar-footer {
+    padding: 10px 18px; border-top: 1px solid var(--border);
+    display: flex; align-items: center; gap: 16px;
+    font-size: 11px; color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .cmd-key {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 18px; height: 18px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 3px; font-size: 10px; margin-right: 4px;
+  }
+
+  /* ══════════════════════════════════════════
+     COMPACT RANK STRIP
+  ══════════════════════════════════════════ */
+  .rank-strip {
+    background: var(--bg-white); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 14px 20px;
+    display: flex; align-items: center; gap: 16px;
+    box-shadow: var(--shadow-sm); cursor: pointer;
+    transition: all 0.2s var(--ease); text-decoration: none; color: inherit;
+  }
+  .rank-strip:hover { border-color: var(--border-hover); box-shadow: var(--shadow-card-hover); }
+  .rank-strip-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px; font-weight: 700; color: var(--blue); flex-shrink: 0;
+  }
+  .rank-strip-label { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+  .rank-strip-divider { width: 1px; height: 32px; background: var(--border); flex-shrink: 0; }
+  .rank-strip-stat { text-align: center; flex: 1; }
+  .rank-strip-stat-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px; font-weight: 700; color: var(--text-primary);
+  }
+  .rank-strip-stat-lbl { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .rank-strip-delta {
+    font-size: 12px; font-weight: 700; color: #1a9e74;
+    background: rgba(26,158,116,0.1); border-radius: 5px;
+    padding: 3px 8px; margin-left: auto; flex-shrink: 0;
+  }
+  .rank-strip-expand {
+    font-size: 12px; color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace; flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+  .rank-strip.expanded .rank-strip-expand { transform: rotate(180deg); }
+  .leaderboard-full { display: none; margin-top: 8px; }
+  .leaderboard-full.open { display: block; }
+
+  /* ══════════════════════════════════════════
+     VISUAL UPGRADES
+  ══════════════════════════════════════════ */
+
+  /* Progress ring */
+  .prog-ring-wrap {
+    display: flex; align-items: center; gap: 20px;
+    background: var(--bg-white); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 16px 22px;
+    box-shadow: var(--shadow-sm); margin-bottom: 16px;
+  }
+  .prog-ring-svg { flex-shrink: 0; }
+  .prog-ring-track { fill: none; stroke: var(--surface); stroke-width: 6; }
+  .prog-ring-fill {
+    fill: none; stroke-width: 6;
+    stroke-linecap: round;
+    stroke: var(--blue);
+    transform-origin: center;
+    transform: rotate(-90deg);
+    transition: stroke-dashoffset 1.2s cubic-bezier(0.4,0,0.2,1);
+  }
+  .prog-ring-label {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+  }
+  .prog-ring-pct {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px; font-weight: 700; color: var(--blue);
+  }
+  .prog-ring-sub { font-size: 9px; color: var(--text-muted); font-weight: 600; letter-spacing: 0.3px; }
+  .prog-ring-container { position: relative; width: 72px; height: 72px; flex-shrink: 0; }
+  .prog-ring-info { flex: 1; min-width: 0; }
+  .prog-ring-title {
+    font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px;
+  }
+  .prog-ring-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.4; }
+  .prog-ring-milestones {
+    display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap;
+  }
+  .prog-milestone {
+    font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 10px;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .prog-milestone.done {
+    background: rgba(26,158,116,0.12); color: #1a9e74;
+    border: 1px solid rgba(26,158,116,0.25);
+  }
+  .prog-milestone.active {
+    background: rgba(40,123,232,0.1); color: #287BE8;
+    border: 1px solid rgba(40,123,232,0.25);
+  }
+  .prog-milestone.locked {
+    background: var(--surface); color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+
+  /* Track card visual upgrades */
+  .track-card-icon {
+    font-size: 28px; margin-bottom: 10px;
+    display: block;
+  }
+  .track-card-visual {
+    height: 4px; border-radius: 2px; margin: 8px 0;
+    background: var(--surface); overflow: hidden;
+  }
+  .track-card-visual-fill {
+    height: 100%; border-radius: 2px;
+    transition: width 1s cubic-bezier(0.4,0,0.2,1);
+  }
+  .track-card { position: relative; overflow: hidden; }
+  .track-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .track-card.active-track::before { background: var(--blue); }
+  .track-card.locked-track::before { background: var(--border); }
+
+  /* Up next card visual accents */
+  .upnext-card { position: relative; overflow: hidden; }
+  .upnext-card-accent {
+    position: absolute; top: 0; left: 0; bottom: 0;
+    width: 3px; border-radius: 2px 0 0 2px;
+  }
+  .accent-blue  { background: var(--blue); }
+  .accent-mint  { background: #1A9E74; }
+  .accent-gold  { background: #d4a017; }
+  .upnext-card-icon {
+    font-size: 22px; margin-bottom: 8px; display: block;
+  }
+
+  /* Stats strip visual */
+  .stat-chip-icon { font-size: 18px; }
+  .stat-chip { gap: 8px; }
+
   /* ── Responsive ── */
   @media (max-width: 900px) {
     .page-main { padding: 24px 20px 80px; }
@@ -551,6 +927,10 @@
     .stats-row { flex-direction: column; }
     .topbar-nav { display: none; }
     .topbar-right { display: none; }
+    .ai-greeting { padding: 20px; }
+    .ai-greeting-text { font-size: 15px; }
+    .cmd-bar { width: calc(100vw - 32px); }
+    .prog-ring-wrap { flex-direction: column; text-align: center; }
   }
 </style>
 </head>
@@ -588,7 +968,6 @@
   <div class="hero-content site-wrap">
     <p class="hero-eyebrow">AI Officer Institute &middot; Dave Hajdu</p>
     <h1>Your <span class="accent">Certification Journey</span></h1>
-    <p class="hero-subtitle">Track your progress, access missions, and build the skills that define the 50/50 era of human + AI work.</p>
     <div class="hero-stats">
       <div class="hero-stat">
         <div class="hero-stat-num">6</div>
@@ -617,33 +996,48 @@
 </section>
 <main class="page-main site-wrap">
 
-  <!-- ── HERO ── -->
-  <div class="hero-card">
-    <div class="hero-inner">
-      <div class="hero-body">
-        <div class="hero-label">Certification Journey</div>
-        <h1>Complete Your<br><em>Challenge</em></h1>
-        <p class="hero-sub">You're on Mission 3 of Generative AI — Advanced Prompt Frameworks. Pick up where you left off.</p>
-        <div class="hero-meta">
-          <span>Mission 3 of 4</span>
-          <span class="hero-meta-sep"></span>
-          <span>Brief 2 of 5</span>
-        </div>
-        <div class="hero-progress-row">
-          <div class="hero-progress-bar">
-            <div class="hero-progress-fill" style="width: 40%;"></div>
-          </div>
-          <span class="hero-progress-pct">40%</span>
-        </div>
-        <div class="hero-actions">
-          <a href="generative-ai/mission-3.html" class="btn btn-white btn-lg">Complete Your Challenge →</a>
-        </div>
+  <!-- ── AI GREETING ── -->
+  <div class="ai-greeting">
+    <div class="ai-greeting-avatar-wrap">
+      <div class="ai-greeting-avatar">
+        <img src="images/AI Buddy - Officer.png" alt="AI Buddy" onerror="this.style.display='none'; this.parentElement.textContent='🤖'">
       </div>
-      <div class="hero-video">
-        <div class="hero-video-bg"></div>
-        <div class="hero-play">
-          <svg width="22" height="24" viewBox="0 0 20 22" fill="white"><polygon points="0,0 20,11 0,22"/></svg>
-        </div>
+      <div class="ai-status-dot"></div>
+    </div>
+    <div class="ai-greeting-body">
+      <div class="ai-greeting-meta">AI Buddy <span>· just now</span></div>
+      <div class="ai-greeting-text" id="aiGreetingText"><span class="ai-cursor"></span></div>
+      <div class="ai-chips" id="aiChips" style="opacity:0; transition: opacity 0.4s;">
+        <button class="ai-chip primary" onclick="window.location='generative-ai/mission-3.html'">Continue Challenge →</button>
+        <button class="ai-chip" onclick="openBuddy('Show me my full progress')">Check Progress</button>
+        <button class="ai-chip" onclick="window.location='micro-sessions/index.html'">Find Micro-Session</button>
+        <button class="ai-chip" onclick="openBuddy('Teach me something new about AI today')">Learn Something</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PROGRESS RING ── -->
+  <div class="prog-ring-wrap">
+    <div class="prog-ring-container">
+      <svg class="prog-ring-svg" width="72" height="72" viewBox="0 0 72 72">
+        <circle class="prog-ring-track" cx="36" cy="36" r="30"/>
+        <circle class="prog-ring-fill" id="progRingFill" cx="36" cy="36" r="30"
+          stroke-dasharray="188.5" stroke-dashoffset="188.5"/>
+      </svg>
+      <div class="prog-ring-label">
+        <span class="prog-ring-pct" id="progRingPct">0%</span>
+        <span class="prog-ring-sub">CERT</span>
+      </div>
+    </div>
+    <div class="prog-ring-info">
+      <div class="prog-ring-title">AI Officer Certification · 36% complete</div>
+      <div class="prog-ring-desc">Mission 3 of Generative AI in progress — 2 tracks remaining after this.</div>
+      <div class="prog-ring-milestones">
+        <span class="prog-milestone done">✓ Gen AI Basics</span>
+        <span class="prog-milestone done">✓ Prompt Engineering</span>
+        <span class="prog-milestone active">⚡ Advanced Frameworks</span>
+        <span class="prog-milestone locked">🔒 Agentic AI</span>
+        <span class="prog-milestone locked">🔒 Leadership</span>
       </div>
     </div>
   </div>
@@ -651,11 +1045,14 @@
   <!-- ── UP NEXT ── -->
   <div class="section-header">
     <span class="section-title">Up Next</span>
+    <span class="cmd-hint" onclick="openCmd()" title="⌘K">⌘K <span style="opacity:0.5">search</span></span>
   </div>
 
   <div class="grid-2">
 
     <a href="micro-sessions/how-to-brief-an-ai-agent.html" class="upnext-card" style="text-decoration:none; display:block;">
+      <div class="upnext-card-accent accent-blue"></div>
+      <span class="upnext-card-icon">⚡</span>
       <div class="upnext-eyebrow">Micro Session</div>
       <div class="upnext-title">How to Brief an AI Agent</div>
       <div class="upnext-desc">The 4 components of a strong agent brief — and why most people get it wrong.</div>
@@ -672,6 +1069,8 @@
     </a>
 
     <div class="upnext-card">
+      <div class="upnext-card-accent accent-mint"></div>
+      <span class="upnext-card-icon">🎯</span>
       <div class="upnext-eyebrow">AIO Labs</div>
       <div class="upnext-title">Office Hours: AI Strategy Review</div>
       <div class="upnext-desc">Live feedback on your AI roadmap from an AIO Labs coach.</div>
@@ -688,60 +1087,103 @@
 
   </div>
 
-  <!-- Blog row -->
-  <a href="blog/posts/four-offices-of-the-future.html" class="blog-row" style="margin-top: 14px;">
-    <div class="blog-row-dot"></div>
-    <div class="blog-row-body">
-      <div class="blog-row-eyebrow">Thought Leadership</div>
-      <div class="blog-row-title">The Four Offices of the Future</div>
+  <!-- Read of the Week -->
+  <div class="rotw-card" style="margin-top: 14px;">
+    <div class="rotw-img">
+      <img src="images/PH Forum + Family Presentation - Four Offices.webp" alt="The Four Offices of the Future">
+      <div class="rotw-img-overlay"></div>
+      <div class="rotw-badge"><span class="rotw-badge-dot"></span> Read of the Week</div>
     </div>
-    <div class="blog-row-date">Mar 19 · 8 min</div>
-  </a>
+    <div class="rotw-body">
+      <div>
+        <div class="rotw-eyebrow"><span class="rotw-eyebrow-dot"></span> Thought Leadership</div>
+        <div class="rotw-title">The Four Offices of the Future</div>
+        <div class="rotw-desc">The workplace isn't just changing — it's splitting into four distinct operating models. Understanding which office you're building for changes everything about how you deploy AI.</div>
+        <div class="rotw-meta">
+          <span>Mar 19</span>
+          <span>·</span>
+          <span>8 min read</span>
+        </div>
+      </div>
+      <div class="rotw-actions">
+        <a href="blog/posts/four-offices-of-the-future.html" class="rotw-btn-read">Read Article →</a>
+        <button class="rotw-btn-chat" onclick="openBuddy('Let\'s discuss The Four Offices of the Future. What are the four models and which one applies most to my work?')">💬 Discuss with AI Buddy</button>
+      </div>
+    </div>
+  </div>
 
   <!-- ── LEADERBOARD ── -->
   <div class="section-header">
     <span class="section-pill royal"><span class="dot"></span> Community</span>
     <span class="section-title">Leaderboard</span>
-    <span class="section-meta">48 cadets — <a href="my-team.html">view all →</a></span>
+    <span class="section-meta"><a href="my-team.html">view all 48 →</a></span>
   </div>
 
-  <div class="leaderboard">
-    <div class="leaderboard-row">
-      <div class="lb-rank gold">1</div>
-      <div class="lb-name">Sarah Chen</div>
-      <span class="lb-cert caio">AIO Labs Certified</span>
-      <div class="lb-pts">2,890</div>
+  <!-- Compact rank summary -->
+  <div class="rank-strip" id="rankStrip" onclick="toggleLeaderboard()">
+    <div>
+      <div class="rank-strip-num">#12</div>
+      <div class="rank-strip-label">Your rank</div>
     </div>
-    <div class="leaderboard-row">
-      <div class="lb-rank silver">2</div>
-      <div class="lb-name">James Liu</div>
-      <span class="lb-cert officer">AI Officer Certified</span>
-      <div class="lb-pts">2,640</div>
+    <div class="rank-strip-divider"></div>
+    <div class="rank-strip-stat">
+      <div class="rank-strip-stat-val">1,240</div>
+      <div class="rank-strip-stat-lbl">XP</div>
     </div>
-    <div class="leaderboard-row">
-      <div class="lb-rank bronze">3</div>
-      <div class="lb-name">Priya Patel</div>
-      <span class="lb-cert officer">AI Officer Certified</span>
-      <div class="lb-pts">2,310</div>
+    <div class="rank-strip-divider"></div>
+    <div class="rank-strip-stat">
+      <div class="rank-strip-stat-val">48</div>
+      <div class="rank-strip-stat-lbl">cadets</div>
     </div>
-    <div class="leaderboard-row" style="padding: 0 22px;"><div class="lb-gap"></div></div>
-    <div class="leaderboard-row">
-      <div class="lb-rank">11</div>
-      <div class="lb-name">Ryan Park</div>
-      <span class="lb-cert agentic">Agentic AI Specialist</span>
-      <div class="lb-pts">1,320</div>
+    <div class="rank-strip-divider"></div>
+    <div class="rank-strip-stat">
+      <div class="rank-strip-stat-val">60</div>
+      <div class="rank-strip-stat-lbl">XP to #11</div>
     </div>
-    <div class="leaderboard-row you">
-      <div class="lb-rank" style="color: var(--blue); font-weight: 700;">12</div>
-      <div class="lb-name">Dave Hajdu <span class="lb-you">YOU</span></div>
-      <span class="lb-cert gen-ai">Generative AI Specialist</span>
-      <div class="lb-pts" style="color: var(--blue);">1,240</div>
-    </div>
-    <div class="leaderboard-row">
-      <div class="lb-rank">13</div>
-      <div class="lb-name">Cadet</div>
-      <span class="lb-cert gen-ai">Generative AI Specialist</span>
-      <div class="lb-pts">1,180</div>
+    <div class="rank-strip-delta">↑ +2 this week</div>
+    <div class="rank-strip-expand">▾</div>
+  </div>
+
+  <!-- Expandable full leaderboard -->
+  <div class="leaderboard-full" id="leaderboardFull">
+    <div class="leaderboard">
+      <div class="leaderboard-row">
+        <div class="lb-rank gold">1</div>
+        <div class="lb-name">Sarah Chen</div>
+        <span class="lb-cert caio">AIO Labs Certified</span>
+        <div class="lb-pts">2,890</div>
+      </div>
+      <div class="leaderboard-row">
+        <div class="lb-rank silver">2</div>
+        <div class="lb-name">James Liu</div>
+        <span class="lb-cert officer">AI Officer Certified</span>
+        <div class="lb-pts">2,640</div>
+      </div>
+      <div class="leaderboard-row">
+        <div class="lb-rank bronze">3</div>
+        <div class="lb-name">Priya Patel</div>
+        <span class="lb-cert officer">AI Officer Certified</span>
+        <div class="lb-pts">2,310</div>
+      </div>
+      <div class="leaderboard-row" style="padding: 0 22px;"><div class="lb-gap"></div></div>
+      <div class="leaderboard-row">
+        <div class="lb-rank">11</div>
+        <div class="lb-name">Ryan Park</div>
+        <span class="lb-cert agentic">Agentic AI Specialist</span>
+        <div class="lb-pts">1,320</div>
+      </div>
+      <div class="leaderboard-row you">
+        <div class="lb-rank" style="color: var(--blue); font-weight: 700;">12</div>
+        <div class="lb-name">Dave Hajdu <span class="lb-you">YOU</span></div>
+        <span class="lb-cert gen-ai">Generative AI Specialist</span>
+        <div class="lb-pts" style="color: var(--blue);">1,240</div>
+      </div>
+      <div class="leaderboard-row">
+        <div class="lb-rank">13</div>
+        <div class="lb-name">Cadet</div>
+        <span class="lb-cert gen-ai">Generative AI Specialist</span>
+        <div class="lb-pts">1,180</div>
+      </div>
     </div>
   </div>
 
@@ -752,7 +1194,8 @@
   </div>
 
   <div class="grid-3">
-    <a href="generative-ai/index.html" class="track-card" style="text-decoration:none; display:block;">
+    <a href="generative-ai/index.html" class="track-card active-track" style="text-decoration:none; display:block;">
+      <span class="track-card-icon">🧠</span>
       <div class="track-card-top">
         <span class="badge badge-fuchsia">Active</span>
         <span class="track-card-pct" style="color: var(--text-primary);">65%</span>
@@ -764,7 +1207,8 @@
       <div class="track-card-meta">4 of 6 missions · AI Officer</div>
     </a>
 
-    <a href="agentic-ai/index.html" class="track-card" style="text-decoration:none; display:block;">
+    <a href="agentic-ai/index.html" class="track-card locked-track" style="text-decoration:none; display:block;">
+      <span class="track-card-icon" style="opacity:0.4">🤖</span>
       <div class="track-card-top">
         <span class="badge badge-royal">Locked</span>
         <span class="track-card-pct" style="color: var(--text-muted);">0%</span>
@@ -776,7 +1220,8 @@
       <div class="track-card-meta">0 of 5 missions · AI Officer</div>
     </a>
 
-    <div class="track-card" style="opacity: 0.55; cursor: default;">
+    <div class="track-card locked-track" style="opacity: 0.55; cursor: default;">
+      <span class="track-card-icon" style="opacity:0.4">🏆</span>
       <div class="track-card-top">
         <span class="badge badge-mint">Locked</span>
         <span class="track-card-pct" style="color: var(--text-muted);">0%</span>
@@ -804,7 +1249,9 @@
 
 <div class="buddy-panel" id="buddyPanel">
   <div class="buddy-panel-head">
-    <div class="buddy-panel-head-avatar">🤖</div>
+    <div class="buddy-panel-head-avatar">
+      <img src="images/AI Buddy - Officer.png" alt="AI Buddy" onerror="this.style.display='none'; this.parentElement.textContent='🤖'">
+    </div>
     <div class="buddy-panel-head-info">
       <div class="buddy-panel-head-name">AI Buddy</div>
       <div class="buddy-panel-head-status">● Online · Your learning assistant</div>
@@ -821,6 +1268,11 @@
       Ask me anything about your coursework, or I can quiz you on what you've covered so far.
     </div>
   </div>
+  <div style="padding: 0 12px 10px; display: flex; flex-wrap: wrap; gap: 6px; flex-shrink: 0;">
+    <button class="ai-chip" style="font-size:12px; padding:5px 11px;" onclick="prefillBuddy('Quiz me on Mission 3')">Quiz me</button>
+    <button class="ai-chip" style="font-size:12px; padding:5px 11px;" onclick="prefillBuddy('What should I focus on today?')">Today's focus</button>
+    <button class="ai-chip" style="font-size:12px; padding:5px 11px;" onclick="prefillBuddy('Explain prompt chaining to me')">Explain a concept</button>
+  </div>
   <div class="buddy-panel-input">
     <input class="buddy-input-field" id="buddyInput" type="text" placeholder="Ask your AI Buddy…" onkeydown="if(event.key==='Enter') sendBuddyMsg()">
     <button class="buddy-send-btn" onclick="sendBuddyMsg()">→</button>
@@ -828,15 +1280,140 @@
 </div>
 
 <div class="buddy-fab" id="buddyFab" onclick="toggleBuddy()">
-  <div class="buddy-fab-avatar">🤖</div>
+  <div class="buddy-fab-avatar" style="overflow:hidden;">
+    <img src="images/AI Buddy - Officer.png" alt="AI Buddy" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.textContent='🤖'">
+  </div>
   AI Buddy
   <div class="buddy-fab-pulse"></div>
 </div>
 
+<!-- ═══════════════════════════════════════════ -->
+<!-- CMD+K OVERLAY                               -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="cmd-overlay" id="cmdOverlay" onclick="closeCmd()"></div>
+<div class="cmd-bar" id="cmdBar">
+  <div class="cmd-bar-row">
+    <span class="cmd-bar-icon">🔍</span>
+    <input class="cmd-bar-input" id="cmdInput" placeholder="Jump to mission, ask AI, or search…"
+      oninput="filterCmd(this.value)" onkeydown="handleCmdKey(event)">
+    <span class="cmd-bar-esc">ESC</span>
+  </div>
+  <div id="cmdResults">
+    <div class="cmd-section-label">Jump to</div>
+    <div class="cmd-item active" onclick="window.location='generative-ai/mission-3.html'">
+      <div class="cmd-item-icon">📘</div>
+      <div class="cmd-item-body">
+        <div class="cmd-item-title">Mission 3 · Advanced Prompt Frameworks</div>
+        <div class="cmd-item-sub">Generative AI · Brief 2 of 5 · 40% complete</div>
+      </div>
+      <span class="cmd-item-tag">in progress</span>
+    </div>
+    <div class="cmd-item" onclick="window.location='micro-sessions/how-to-brief-an-ai-agent.html'">
+      <div class="cmd-item-icon">⚡</div>
+      <div class="cmd-item-body">
+        <div class="cmd-item-title">How to Brief an AI Agent</div>
+        <div class="cmd-item-sub">Micro Session · Apr 3 · 12 PM ET</div>
+      </div>
+      <span class="cmd-item-tag">upcoming</span>
+    </div>
+    <div class="cmd-item" onclick="window.location='certification.html'">
+      <div class="cmd-item-icon">🏅</div>
+      <div class="cmd-item-body">
+        <div class="cmd-item-title">Certification</div>
+        <div class="cmd-item-sub">AI Officer Institute · 36% complete</div>
+      </div>
+    </div>
+    <div class="cmd-item" onclick="window.location='coaching.html'">
+      <div class="cmd-item-icon">🎯</div>
+      <div class="cmd-item-body">
+        <div class="cmd-item-title">AIO Labs Coaching</div>
+        <div class="cmd-item-sub">Live office hours · Next: Apr 5</div>
+      </div>
+    </div>
+    <div class="cmd-section-label">Ask AI Buddy</div>
+    <div class="cmd-item" onclick="openBuddy('Quiz me on Advanced Prompt Frameworks')">
+      <div class="cmd-item-icon">🤖</div>
+      <div class="cmd-item-body">
+        <div class="cmd-item-title">Quiz me on Mission 3</div>
+        <div class="cmd-item-sub">Test your knowledge so far</div>
+      </div>
+    </div>
+    <div class="cmd-item" onclick="openBuddy('What should I focus on today?')">
+      <div class="cmd-item-icon">🤖</div>
+      <div class="cmd-item-body">
+        <div class="cmd-item-title">What should I focus on today?</div>
+        <div class="cmd-item-sub">Get a personalised recommendation</div>
+      </div>
+    </div>
+  </div>
+  <div class="cmd-bar-footer">
+    <span><span class="cmd-key">↑</span><span class="cmd-key">↓</span> navigate</span>
+    <span><span class="cmd-key">↵</span> open</span>
+    <span><span class="cmd-key">ESC</span> close</span>
+  </div>
+</div>
+
 <script>
+  /* ── Progress ring animation ── */
+  const CERT_PCT = 36;
+  const circumference = 2 * Math.PI * 30; // r=30
+  window.addEventListener('load', () => {
+    const fill = document.getElementById('progRingFill');
+    const pctEl = document.getElementById('progRingPct');
+    if (!fill) return;
+    fill.style.strokeDasharray = circumference;
+    fill.style.strokeDashoffset = circumference;
+    setTimeout(() => {
+      fill.style.strokeDashoffset = circumference * (1 - CERT_PCT / 100);
+    }, 300);
+    // count up number
+    let n = 0;
+    const ticker = setInterval(() => {
+      n = Math.min(n + 1, CERT_PCT);
+      pctEl.textContent = n + '%';
+      if (n >= CERT_PCT) clearInterval(ticker);
+    }, 1200 / CERT_PCT);
+  });
+
+  /* ── AI Greeting typewriter ── */
+  const greetingMsg = "Morning, Dave 👋 You're 40% through Mission 3 — Brief 2 of 5. Want to pick up where you left off, or should I quiz you on what you've covered?";
+  let charIdx = 0;
+  const greetingEl = document.getElementById('aiGreetingText');
+  const chipsEl = document.getElementById('aiChips');
+
+  function typeGreeting() {
+    if (charIdx < greetingMsg.length) {
+      greetingEl.innerHTML = greetingMsg.slice(0, charIdx + 1) + '<span class="ai-cursor"></span>';
+      charIdx++;
+      setTimeout(typeGreeting, charIdx < 10 ? 40 : Math.random() * 28 + 18);
+    } else {
+      greetingEl.innerHTML = greetingMsg;
+      chipsEl.style.opacity = '1';
+    }
+  }
+  setTimeout(typeGreeting, 600);
+
+  /* ── Buddy panel ── */
   function toggleBuddy() {
     document.getElementById('buddyPanel').classList.toggle('open');
   }
+
+  function openBuddy(prefill) {
+    const panel = document.getElementById('buddyPanel');
+    panel.classList.add('open');
+    if (prefill) {
+      const input = document.getElementById('buddyInput');
+      input.value = prefill;
+      input.focus();
+    }
+  }
+
+  function prefillBuddy(text) {
+    const input = document.getElementById('buddyInput');
+    input.value = text;
+    input.focus();
+  }
+
   function sendBuddyMsg() {
     const input = document.getElementById('buddyInput');
     const msgs = document.getElementById('buddyMsgs');
@@ -851,11 +1428,59 @@
     setTimeout(() => {
       const reply = document.createElement('div');
       reply.className = 'buddy-msg from-buddy';
-      reply.innerHTML = '<div class="buddy-msg-name">AI Buddy</div>Great question! Full AI responses coming soon.';
+      reply.innerHTML = '<div class="buddy-msg-name">AI Buddy</div>Great question! Full AI responses coming soon — stay tuned.';
       msgs.appendChild(reply);
       msgs.scrollTop = msgs.scrollHeight;
     }, 600);
   }
+
+  /* ── Leaderboard toggle ── */
+  function toggleLeaderboard() {
+    const full = document.getElementById('leaderboardFull');
+    const strip = document.getElementById('rankStrip');
+    full.classList.toggle('open');
+    strip.classList.toggle('expanded');
+  }
+
+  /* ── CMD+K ── */
+  function openCmd() {
+    document.getElementById('cmdBar').classList.add('open');
+    document.getElementById('cmdOverlay').classList.add('open');
+    setTimeout(() => document.getElementById('cmdInput').focus(), 50);
+  }
+  function closeCmd() {
+    document.getElementById('cmdBar').classList.remove('open');
+    document.getElementById('cmdOverlay').classList.remove('open');
+    document.getElementById('cmdInput').value = '';
+  }
+  function handleCmdKey(e) {
+    if (e.key === 'Escape') closeCmd();
+    if (e.key === 'Enter') {
+      const active = document.querySelector('.cmd-item.active');
+      if (active) active.click();
+    }
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      const items = [...document.querySelectorAll('.cmd-item')];
+      const idx = items.findIndex(i => i.classList.contains('active'));
+      items.forEach(i => i.classList.remove('active'));
+      const next = e.key === 'ArrowDown'
+        ? items[(idx + 1) % items.length]
+        : items[(idx - 1 + items.length) % items.length];
+      if (next) { next.classList.add('active'); next.scrollIntoView({ block: 'nearest' }); }
+    }
+  }
+  function filterCmd(val) {
+    const items = document.querySelectorAll('.cmd-item');
+    items.forEach(item => {
+      const text = item.textContent.toLowerCase();
+      item.style.display = text.includes(val.toLowerCase()) ? '' : 'none';
+    });
+  }
+  document.addEventListener('keydown', e => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); openCmd(); }
+    if (e.key === 'Escape') closeCmd();
+  });
 </script>
 
 </body>
