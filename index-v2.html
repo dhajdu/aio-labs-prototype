@@ -466,7 +466,8 @@
   }
   .buddy-panel {
     position: fixed; bottom: 92px; right: 28px; z-index: 999;
-    width: 340px;
+    width: 380px;
+    height: 520px;
     background: var(--bg-white);
     border: 1px solid var(--border);
     border-radius: 16px;
@@ -481,12 +482,16 @@
   .buddy-panel-head {
     background: var(--navy); padding: 14px 18px;
     display: flex; align-items: center; gap: 12px;
+    flex-shrink: 0;
   }
   .buddy-panel-head-avatar {
     width: 36px; height: 36px; border-radius: 50%;
     background: linear-gradient(135deg, #287BE8, #1A9E74);
     display: flex; align-items: center; justify-content: center;
-    font-size: 18px; flex-shrink: 0;
+    font-size: 18px; flex-shrink: 0; overflow: hidden;
+  }
+  .buddy-panel-head-avatar img {
+    width: 100%; height: 100%; object-fit: cover;
   }
   .buddy-panel-head-info { flex: 1; }
   .buddy-panel-head-name { font-size: 14px; font-weight: 700; color: var(--white); }
@@ -501,7 +506,7 @@
   .buddy-panel-close:hover { background: rgba(255,255,255,0.2); color: white; }
   .buddy-panel-msgs {
     flex: 1; padding: 16px; display: flex; flex-direction: column; gap: 10px;
-    min-height: 180px; max-height: 280px; overflow-y: auto;
+    overflow-y: auto;
   }
   .buddy-msg {
     max-width: 85%; padding: 10px 14px; border-radius: 12px;
@@ -544,10 +549,10 @@
      AI GREETING STRIP
   ══════════════════════════════════════════ */
   .ai-greeting {
-    display: flex; gap: 16px; align-items: flex-start;
+    display: flex; gap: 14px; align-items: center;
     background: var(--navy);
     border-radius: 16px;
-    padding: 24px 28px;
+    padding: 16px 22px;
     margin-bottom: 16px;
     position: relative;
     overflow: hidden;
@@ -559,13 +564,16 @@
     pointer-events: none;
   }
   .ai-greeting-avatar-wrap {
-    position: relative; flex-shrink: 0; margin-top: 2px;
+    position: relative; flex-shrink: 0;
   }
   .ai-greeting-avatar {
-    width: 42px; height: 42px; border-radius: 50%;
+    width: 48px; height: 48px; border-radius: 50%;
     background: linear-gradient(135deg, #287BE8, #1A9E74);
     display: flex; align-items: center; justify-content: center;
-    font-size: 20px;
+    font-size: 20px; overflow: hidden;
+  }
+  .ai-greeting-avatar img {
+    width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
   }
   .ai-status-dot {
     position: absolute; bottom: 1px; right: 1px;
@@ -577,16 +585,16 @@
   .ai-greeting-body { flex: 1; min-width: 0; position: relative; }
   .ai-greeting-meta {
     font-size: 11px; font-weight: 700; letter-spacing: 0.4px;
-    color: #6FF2C1; margin-bottom: 8px;
+    color: #6FF2C1; margin-bottom: 4px;
     display: flex; align-items: center; gap: 8px;
   }
   .ai-greeting-meta span { color: rgba(255,255,255,0.3); font-weight: 400; }
   .ai-greeting-text {
-    font-size: 17px; font-weight: 500;
+    font-size: 15px; font-weight: 500;
     color: rgba(255,255,255,0.92);
-    line-height: 1.55;
-    margin-bottom: 20px;
-    min-height: 28px;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    min-height: 22px;
   }
   .ai-cursor {
     display: inline-block;
@@ -836,17 +844,19 @@
   <!-- ── AI GREETING ── -->
   <div class="ai-greeting">
     <div class="ai-greeting-avatar-wrap">
-      <div class="ai-greeting-avatar">🤖</div>
+      <div class="ai-greeting-avatar">
+        <img src="ai-buddy-avatar.png" alt="AI Buddy" onerror="this.style.display='none'; this.parentElement.textContent='🤖'">
+      </div>
       <div class="ai-status-dot"></div>
     </div>
     <div class="ai-greeting-body">
       <div class="ai-greeting-meta">AI Buddy <span>· just now</span></div>
       <div class="ai-greeting-text" id="aiGreetingText"><span class="ai-cursor"></span></div>
       <div class="ai-chips" id="aiChips" style="opacity:0; transition: opacity 0.4s;">
-        <button class="ai-chip primary" onclick="window.location='generative-ai/mission-3.html'">Pick up Mission 3 →</button>
-        <button class="ai-chip" onclick="openBuddy('Quiz me on Advanced Prompt Frameworks')">Quiz me first</button>
-        <button class="ai-chip" onclick="openBuddy('What should I focus on today?')">What should I focus on?</button>
-        <button class="ai-chip" onclick="openBuddy('Show me my full progress')">My progress</button>
+        <button class="ai-chip primary" onclick="window.location='generative-ai/mission-3.html'">Continue Challenge →</button>
+        <button class="ai-chip" onclick="openBuddy('Show me my full progress')">Check Progress</button>
+        <button class="ai-chip" onclick="window.location='micro-sessions/index.html'">Find Micro-Session</button>
+        <button class="ai-chip" onclick="openBuddy('Teach me something new about AI today')">Learn Something</button>
       </div>
     </div>
   </div>
@@ -1036,7 +1046,9 @@
 
 <div class="buddy-panel" id="buddyPanel">
   <div class="buddy-panel-head">
-    <div class="buddy-panel-head-avatar">🤖</div>
+    <div class="buddy-panel-head-avatar">
+      <img src="ai-buddy-avatar.png" alt="AI Buddy" onerror="this.style.display='none'; this.parentElement.textContent='🤖'">
+    </div>
     <div class="buddy-panel-head-info">
       <div class="buddy-panel-head-name">AI Buddy</div>
       <div class="buddy-panel-head-status">● Online · Your learning assistant</div>
@@ -1052,6 +1064,11 @@
       <div class="buddy-msg-name">AI Buddy</div>
       Ask me anything about your coursework, or I can quiz you on what you've covered so far.
     </div>
+  </div>
+  <div style="padding: 0 12px 10px; display: flex; flex-wrap: wrap; gap: 6px; flex-shrink: 0;">
+    <button class="ai-chip" style="font-size:12px; padding:5px 11px;" onclick="prefillBuddy('Quiz me on Mission 3')">Quiz me</button>
+    <button class="ai-chip" style="font-size:12px; padding:5px 11px;" onclick="prefillBuddy('What should I focus on today?')">Today's focus</button>
+    <button class="ai-chip" style="font-size:12px; padding:5px 11px;" onclick="prefillBuddy('Explain prompt chaining to me')">Explain a concept</button>
   </div>
   <div class="buddy-panel-input">
     <input class="buddy-input-field" id="buddyInput" type="text" placeholder="Ask your AI Buddy…" onkeydown="if(event.key==='Enter') sendBuddyMsg()">
@@ -1163,6 +1180,12 @@
       input.value = prefill;
       input.focus();
     }
+  }
+
+  function prefillBuddy(text) {
+    const input = document.getElementById('buddyInput');
+    input.value = text;
+    input.focus();
   }
 
   function sendBuddyMsg() {
