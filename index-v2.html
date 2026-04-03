@@ -291,35 +291,94 @@
   }
   .upnext-card:hover .upnext-arrow { color: var(--blue); transform: translateX(3px); }
 
-  /* ── Blog row ── */
+  /* ── Blog row (legacy, kept for other pages) ── */
   .blog-row {
-    background: var(--bg-white);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 18px 22px;
+    background: var(--bg-white); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 18px 22px;
     display: flex; align-items: center; gap: 16px;
-    transition: all 0.2s var(--ease);
-    box-shadow: var(--shadow-sm);
+    transition: all 0.2s var(--ease); box-shadow: var(--shadow-sm);
     color: inherit; text-decoration: none;
   }
-  .blog-row:hover {
-    border-color: var(--border-hover);
-    box-shadow: var(--shadow-card-hover);
-    transform: translateY(-1px);
-  }
-  .blog-row-dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--mint-dark); flex-shrink: 0;
-  }
+  .blog-row:hover { border-color: var(--border-hover); box-shadow: var(--shadow-card-hover); transform: translateY(-1px); }
+  .blog-row-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--mint-dark); flex-shrink: 0; }
   .blog-row-body { flex: 1; min-width: 0; }
-  .blog-row-eyebrow {
-    font-size: 10px; font-weight: 700; letter-spacing: 0.5px;
-    text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 2px;
-  }
+  .blog-row-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 2px; }
   .blog-row-title { font-size: 15px; font-weight: 600; color: var(--text-primary); }
-  .blog-row-date {
-    font-size: 11px; color: var(--text-tertiary);
-    font-family: 'JetBrains Mono', monospace; flex-shrink: 0;
+  .blog-row-date { font-size: 11px; color: var(--text-tertiary); font-family: 'JetBrains Mono', monospace; flex-shrink: 0; }
+
+  /* ── Read of the Week feature card ── */
+  .rotw-card {
+    background: var(--bg-white); border: 1px solid var(--border);
+    border-radius: 14px; overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.2s var(--ease);
+    display: grid; grid-template-columns: 1fr 1.1fr;
+  }
+  .rotw-card:hover { box-shadow: var(--shadow-card-hover); border-color: var(--border-hover); }
+  .rotw-img {
+    position: relative; overflow: hidden; min-height: 220px;
+  }
+  .rotw-img img {
+    width: 100%; height: 100%; object-fit: cover;
+    display: block; transition: transform 0.4s var(--ease);
+  }
+  .rotw-card:hover .rotw-img img { transform: scale(1.04); }
+  .rotw-img-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(4,16,45,0.35) 0%, rgba(40,123,232,0.15) 100%);
+  }
+  .rotw-badge {
+    position: absolute; top: 14px; left: 14px;
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--navy); color: #6FF2C1;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.8px;
+    text-transform: uppercase; padding: 5px 11px; border-radius: 20px;
+    border: 1px solid rgba(111,242,193,0.3);
+  }
+  .rotw-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #6FF2C1; animation: buddy-pulse 2s infinite; }
+  .rotw-body {
+    padding: 24px 26px; display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .rotw-eyebrow {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.8px;
+    text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .rotw-eyebrow-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--mint-dark); }
+  .rotw-title {
+    font-size: 18px; font-weight: 700; color: var(--text-primary);
+    line-height: 1.3; margin-bottom: 10px; letter-spacing: -0.2px;
+  }
+  .rotw-desc {
+    font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 18px; flex: 1;
+  }
+  .rotw-meta {
+    display: flex; align-items: center; gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--text-muted); margin-bottom: 18px;
+  }
+  .rotw-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  .rotw-btn-read {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--navy); color: white;
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+    padding: 9px 18px; border-radius: 8px; text-decoration: none;
+    transition: all 0.15s; border: none; cursor: pointer;
+  }
+  .rotw-btn-read:hover { background: var(--blue); transform: translateY(-1px); }
+  .rotw-btn-chat {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(40,123,232,0.08); color: var(--blue);
+    border: 1px solid rgba(40,123,232,0.2);
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+    padding: 9px 18px; border-radius: 8px; text-decoration: none;
+    transition: all 0.15s; cursor: pointer;
+  }
+  .rotw-btn-chat:hover { background: rgba(40,123,232,0.15); border-color: var(--blue); transform: translateY(-1px); }
+
+  @media (max-width: 700px) {
+    .rotw-card { grid-template-columns: 1fr; }
+    .rotw-img { min-height: 160px; }
   }
 
   /* ── Leaderboard ── */
@@ -941,7 +1000,7 @@
   <div class="ai-greeting">
     <div class="ai-greeting-avatar-wrap">
       <div class="ai-greeting-avatar">
-        <img src="ai-buddy-avatar.png" alt="AI Buddy" onerror="this.style.display='none'; this.parentElement.textContent='🤖'">
+        <img src="images/AI Buddy - Officer.png" alt="AI Buddy" onerror="this.style.display='none'; this.parentElement.textContent='🤖'">
       </div>
       <div class="ai-status-dot"></div>
     </div>
@@ -1028,15 +1087,30 @@
 
   </div>
 
-  <!-- Blog row -->
-  <a href="blog/posts/four-offices-of-the-future.html" class="blog-row" style="margin-top: 14px;">
-    <div class="blog-row-dot"></div>
-    <div class="blog-row-body">
-      <div class="blog-row-eyebrow">Thought Leadership</div>
-      <div class="blog-row-title">The Four Offices of the Future</div>
+  <!-- Read of the Week -->
+  <div class="rotw-card" style="margin-top: 14px;">
+    <div class="rotw-img">
+      <img src="images/PH Forum + Family Presentation - Four Offices.webp" alt="The Four Offices of the Future">
+      <div class="rotw-img-overlay"></div>
+      <div class="rotw-badge"><span class="rotw-badge-dot"></span> Read of the Week</div>
     </div>
-    <div class="blog-row-date">Mar 19 · 8 min</div>
-  </a>
+    <div class="rotw-body">
+      <div>
+        <div class="rotw-eyebrow"><span class="rotw-eyebrow-dot"></span> Thought Leadership</div>
+        <div class="rotw-title">The Four Offices of the Future</div>
+        <div class="rotw-desc">The workplace isn't just changing — it's splitting into four distinct operating models. Understanding which office you're building for changes everything about how you deploy AI.</div>
+        <div class="rotw-meta">
+          <span>Mar 19</span>
+          <span>·</span>
+          <span>8 min read</span>
+        </div>
+      </div>
+      <div class="rotw-actions">
+        <a href="blog/posts/four-offices-of-the-future.html" class="rotw-btn-read">Read Article →</a>
+        <button class="rotw-btn-chat" onclick="openBuddy('Let\'s discuss The Four Offices of the Future. What are the four models and which one applies most to my work?')">💬 Discuss with AI Buddy</button>
+      </div>
+    </div>
+  </div>
 
   <!-- ── LEADERBOARD ── -->
   <div class="section-header">
@@ -1176,7 +1250,7 @@
 <div class="buddy-panel" id="buddyPanel">
   <div class="buddy-panel-head">
     <div class="buddy-panel-head-avatar">
-      <img src="ai-buddy-avatar.png" alt="AI Buddy" onerror="this.style.display='none'; this.parentElement.textContent='🤖'">
+      <img src="images/AI Buddy - Officer.png" alt="AI Buddy" onerror="this.style.display='none'; this.parentElement.textContent='🤖'">
     </div>
     <div class="buddy-panel-head-info">
       <div class="buddy-panel-head-name">AI Buddy</div>
@@ -1206,7 +1280,9 @@
 </div>
 
 <div class="buddy-fab" id="buddyFab" onclick="toggleBuddy()">
-  <div class="buddy-fab-avatar">🤖</div>
+  <div class="buddy-fab-avatar" style="overflow:hidden;">
+    <img src="images/AI Buddy - Officer.png" alt="AI Buddy" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.textContent='🤖'">
+  </div>
   AI Buddy
   <div class="buddy-fab-pulse"></div>
 </div>
