@@ -761,6 +761,102 @@
   .leaderboard-full { display: none; margin-top: 8px; }
   .leaderboard-full.open { display: block; }
 
+  /* ══════════════════════════════════════════
+     VISUAL UPGRADES
+  ══════════════════════════════════════════ */
+
+  /* Progress ring */
+  .prog-ring-wrap {
+    display: flex; align-items: center; gap: 20px;
+    background: var(--bg-white); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 16px 22px;
+    box-shadow: var(--shadow-sm); margin-bottom: 16px;
+  }
+  .prog-ring-svg { flex-shrink: 0; }
+  .prog-ring-track { fill: none; stroke: var(--surface); stroke-width: 6; }
+  .prog-ring-fill {
+    fill: none; stroke-width: 6;
+    stroke-linecap: round;
+    stroke: var(--blue);
+    transform-origin: center;
+    transform: rotate(-90deg);
+    transition: stroke-dashoffset 1.2s cubic-bezier(0.4,0,0.2,1);
+  }
+  .prog-ring-label {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+  }
+  .prog-ring-pct {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px; font-weight: 700; color: var(--blue);
+  }
+  .prog-ring-sub { font-size: 9px; color: var(--text-muted); font-weight: 600; letter-spacing: 0.3px; }
+  .prog-ring-container { position: relative; width: 72px; height: 72px; flex-shrink: 0; }
+  .prog-ring-info { flex: 1; min-width: 0; }
+  .prog-ring-title {
+    font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px;
+  }
+  .prog-ring-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.4; }
+  .prog-ring-milestones {
+    display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap;
+  }
+  .prog-milestone {
+    font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 10px;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .prog-milestone.done {
+    background: rgba(26,158,116,0.12); color: #1a9e74;
+    border: 1px solid rgba(26,158,116,0.25);
+  }
+  .prog-milestone.active {
+    background: rgba(40,123,232,0.1); color: #287BE8;
+    border: 1px solid rgba(40,123,232,0.25);
+  }
+  .prog-milestone.locked {
+    background: var(--surface); color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+
+  /* Track card visual upgrades */
+  .track-card-icon {
+    font-size: 28px; margin-bottom: 10px;
+    display: block;
+  }
+  .track-card-visual {
+    height: 4px; border-radius: 2px; margin: 8px 0;
+    background: var(--surface); overflow: hidden;
+  }
+  .track-card-visual-fill {
+    height: 100%; border-radius: 2px;
+    transition: width 1s cubic-bezier(0.4,0,0.2,1);
+  }
+  .track-card { position: relative; overflow: hidden; }
+  .track-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .track-card.active-track::before { background: var(--blue); }
+  .track-card.locked-track::before { background: var(--border); }
+
+  /* Up next card visual accents */
+  .upnext-card { position: relative; overflow: hidden; }
+  .upnext-card-accent {
+    position: absolute; top: 0; left: 0; bottom: 0;
+    width: 3px; border-radius: 2px 0 0 2px;
+  }
+  .accent-blue  { background: var(--blue); }
+  .accent-mint  { background: #1A9E74; }
+  .accent-gold  { background: #d4a017; }
+  .upnext-card-icon {
+    font-size: 22px; margin-bottom: 8px; display: block;
+  }
+
+  /* Stats strip visual */
+  .stat-chip-icon { font-size: 18px; }
+  .stat-chip { gap: 8px; }
+
   /* ── Responsive ── */
   @media (max-width: 900px) {
     .page-main { padding: 24px 20px 80px; }
@@ -775,6 +871,7 @@
     .ai-greeting { padding: 20px; }
     .ai-greeting-text { font-size: 15px; }
     .cmd-bar { width: calc(100vw - 32px); }
+    .prog-ring-wrap { flex-direction: column; text-align: center; }
   }
 </style>
 </head>
@@ -812,7 +909,6 @@
   <div class="hero-content site-wrap">
     <p class="hero-eyebrow">AI Officer Institute &middot; Dave Hajdu</p>
     <h1>Your <span class="accent">Certification Journey</span></h1>
-    <p class="hero-subtitle">Track your progress, access missions, and build the skills that define the 50/50 era of human + AI work.</p>
     <div class="hero-stats">
       <div class="hero-stat">
         <div class="hero-stat-num">6</div>
@@ -861,6 +957,32 @@
     </div>
   </div>
 
+  <!-- ── PROGRESS RING ── -->
+  <div class="prog-ring-wrap">
+    <div class="prog-ring-container">
+      <svg class="prog-ring-svg" width="72" height="72" viewBox="0 0 72 72">
+        <circle class="prog-ring-track" cx="36" cy="36" r="30"/>
+        <circle class="prog-ring-fill" id="progRingFill" cx="36" cy="36" r="30"
+          stroke-dasharray="188.5" stroke-dashoffset="188.5"/>
+      </svg>
+      <div class="prog-ring-label">
+        <span class="prog-ring-pct" id="progRingPct">0%</span>
+        <span class="prog-ring-sub">CERT</span>
+      </div>
+    </div>
+    <div class="prog-ring-info">
+      <div class="prog-ring-title">AI Officer Certification · 36% complete</div>
+      <div class="prog-ring-desc">Mission 3 of Generative AI in progress — 2 tracks remaining after this.</div>
+      <div class="prog-ring-milestones">
+        <span class="prog-milestone done">✓ Gen AI Basics</span>
+        <span class="prog-milestone done">✓ Prompt Engineering</span>
+        <span class="prog-milestone active">⚡ Advanced Frameworks</span>
+        <span class="prog-milestone locked">🔒 Agentic AI</span>
+        <span class="prog-milestone locked">🔒 Leadership</span>
+      </div>
+    </div>
+  </div>
+
   <!-- ── UP NEXT ── -->
   <div class="section-header">
     <span class="section-title">Up Next</span>
@@ -870,6 +992,8 @@
   <div class="grid-2">
 
     <a href="micro-sessions/how-to-brief-an-ai-agent.html" class="upnext-card" style="text-decoration:none; display:block;">
+      <div class="upnext-card-accent accent-blue"></div>
+      <span class="upnext-card-icon">⚡</span>
       <div class="upnext-eyebrow">Micro Session</div>
       <div class="upnext-title">How to Brief an AI Agent</div>
       <div class="upnext-desc">The 4 components of a strong agent brief — and why most people get it wrong.</div>
@@ -886,6 +1010,8 @@
     </a>
 
     <div class="upnext-card">
+      <div class="upnext-card-accent accent-mint"></div>
+      <span class="upnext-card-icon">🎯</span>
       <div class="upnext-eyebrow">AIO Labs</div>
       <div class="upnext-title">Office Hours: AI Strategy Review</div>
       <div class="upnext-desc">Live feedback on your AI roadmap from an AIO Labs coach.</div>
@@ -994,7 +1120,8 @@
   </div>
 
   <div class="grid-3">
-    <a href="generative-ai/index.html" class="track-card" style="text-decoration:none; display:block;">
+    <a href="generative-ai/index.html" class="track-card active-track" style="text-decoration:none; display:block;">
+      <span class="track-card-icon">🧠</span>
       <div class="track-card-top">
         <span class="badge badge-fuchsia">Active</span>
         <span class="track-card-pct" style="color: var(--text-primary);">65%</span>
@@ -1006,7 +1133,8 @@
       <div class="track-card-meta">4 of 6 missions · AI Officer</div>
     </a>
 
-    <a href="agentic-ai/index.html" class="track-card" style="text-decoration:none; display:block;">
+    <a href="agentic-ai/index.html" class="track-card locked-track" style="text-decoration:none; display:block;">
+      <span class="track-card-icon" style="opacity:0.4">🤖</span>
       <div class="track-card-top">
         <span class="badge badge-royal">Locked</span>
         <span class="track-card-pct" style="color: var(--text-muted);">0%</span>
@@ -1018,7 +1146,8 @@
       <div class="track-card-meta">0 of 5 missions · AI Officer</div>
     </a>
 
-    <div class="track-card" style="opacity: 0.55; cursor: default;">
+    <div class="track-card locked-track" style="opacity: 0.55; cursor: default;">
+      <span class="track-card-icon" style="opacity:0.4">🏆</span>
       <div class="track-card-top">
         <span class="badge badge-mint">Locked</span>
         <span class="track-card-pct" style="color: var(--text-muted);">0%</span>
@@ -1149,6 +1278,27 @@
 </div>
 
 <script>
+  /* ── Progress ring animation ── */
+  const CERT_PCT = 36;
+  const circumference = 2 * Math.PI * 30; // r=30
+  window.addEventListener('load', () => {
+    const fill = document.getElementById('progRingFill');
+    const pctEl = document.getElementById('progRingPct');
+    if (!fill) return;
+    fill.style.strokeDasharray = circumference;
+    fill.style.strokeDashoffset = circumference;
+    setTimeout(() => {
+      fill.style.strokeDashoffset = circumference * (1 - CERT_PCT / 100);
+    }, 300);
+    // count up number
+    let n = 0;
+    const ticker = setInterval(() => {
+      n = Math.min(n + 1, CERT_PCT);
+      pctEl.textContent = n + '%';
+      if (n >= CERT_PCT) clearInterval(ticker);
+    }, 1200 / CERT_PCT);
+  });
+
   /* ── AI Greeting typewriter ── */
   const greetingMsg = "Morning, Dave 👋 You're 40% through Mission 3 — Brief 2 of 5. Want to pick up where you left off, or should I quiz you on what you've covered?";
   let charIdx = 0;
